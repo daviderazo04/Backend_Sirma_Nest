@@ -149,7 +149,7 @@ import { PersonaModule } from './persona/persona.module';
           Zonadolor,
         ],
         synchronize: true, // Solo para desarrollo
-        logging: true,
+        logging: false,
       }),
     }),
     PersonaModule,
