@@ -117,25 +117,6 @@ export class Persona {
   })
   perCuidador: string | null;
 
-  @Column("decimal", {
-    name: "PER_PESO",
-    nullable: true,
-    precision: 5,
-    scale: 2,
-  })
-  perPeso: string | null;
-
-  @Column("decimal", {
-    name: "PER_TALLA",
-    nullable: true,
-    precision: 3,
-    scale: 2,
-  })
-  perTalla: string | null;
-
-  @Column("tinyint", { name: "PER_DISCAPACIDAD", nullable: true })
-  perDiscapacidad: number | null;
-
   @OneToMany(() => PersonaFicha, (personaFicha) => personaFicha.idpersona2)
   personaFichas: PersonaFicha[];
 }

@@ -81,15 +81,4 @@ export class CreatePersonaDto {
   @Length(1, 80)
   perCuidador?: string;
 
-  @IsOptional()
-  @IsDecimal({ decimal_digits: '0,2' })
-  perPeso?: string;
-
-  @IsOptional()
-  @IsDecimal({ decimal_digits: '0,2' })
-  perTalla?: string;
-
-  @IsOptional()
-  @IsNumber()
-  perDiscapacidad?: number;
 }

@@ -46,6 +46,15 @@ export class Fisioterapia {
   @Column("smallint", { name: "FIS_DOLOR", nullable: true })
   fisDolor: number | null;
 
+  @Column("decimal", { name: "FIS_PESO", nullable: true })
+  fisPeso: number | null;
+
+  @Column("decimal", { name: "FIS_TALLA", nullable: true })
+  fisTalla: number | null;
+
+  @Column("tinyint", { name: "FIS_DISCAPACIDAD", nullable: true })
+  fisDiscapacidad: number | null;
+
   @OneToMany(() => Dolorfisio, (dolorfisio) => dolorfisio.idfisioterapia2)
   dolorfisios: Dolorfisio[];
 
