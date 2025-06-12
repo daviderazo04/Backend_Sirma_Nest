@@ -11,6 +11,11 @@ import {
 export class CreatePersonaDto {
   @IsOptional()
   @IsString()
+  @Length(1, 6)
+  idFicha?: string;
+
+  @IsOptional()
+  @IsString()
   @Length(1, 10)
   perComunidad?: string;
 

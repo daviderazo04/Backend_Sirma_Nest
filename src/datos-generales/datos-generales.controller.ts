@@ -1,34 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,Put } from '@nestjs/common';
 import { DatosGeneralesService } from './datos-generales.service';
 import { CreateDatosGeneraleDto } from './dto/create-datos-generale.dto';
 import { UpdateDatosGeneraleDto } from './dto/update-datos-generale.dto';
 
-@Controller('datos-generales')
+@Controller('api/datos-generales')
 export class DatosGeneralesController {
   constructor(private readonly datosGeneralesService: DatosGeneralesService) {}
 
   @Post()
-  create(@Body() createDatosGeneraleDto: CreateDatosGeneraleDto) {
-    return this.datosGeneralesService.create(createDatosGeneraleDto);
+  async create(@Body() createDatosGeneraleDto: CreateDatosGeneraleDto) {
+    return await this.datosGeneralesService.create(createDatosGeneraleDto);
   }
 
   @Get()
-  findAll() {
-    return this.datosGeneralesService.findAll();
+  async findAll() {
+    return await this.datosGeneralesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.datosGeneralesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.datosGeneralesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDatosGeneraleDto: UpdateDatosGeneraleDto) {
-    return this.datosGeneralesService.update(+id, updateDatosGeneraleDto);
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateDatosGeneraleDto: UpdateDatosGeneraleDto) {
+    return await this.datosGeneralesService.update(+id, updateDatosGeneraleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.datosGeneralesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.datosGeneralesService.remove(+id);
   }
 }

@@ -14,8 +14,8 @@ export class Datosgenerales {
   @PrimaryGeneratedColumn({ type: "int", name: "IDDATOSGENERALES" })
   iddatosgenerales: number;
 
-  @Column("varchar", { name: "IDFICHA", length: 6 })
-  idficha: string;
+    // @Column("varchar", { name: "IDFICHA", length: 6 })
+    // idficha: string;
 
   @Column("varchar", {
     name: "DG_NOMBREENCUESTADOR",
@@ -166,5 +166,5 @@ export class Datosgenerales {
     onUpdate: "RESTRICT",
   })
   @JoinColumn([{ name: "IDFICHA", referencedColumnName: "idficha" }])
-  idficha2: Paciente;
+  idficha: Paciente;
 }

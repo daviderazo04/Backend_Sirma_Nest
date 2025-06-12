@@ -37,7 +37,7 @@ export class Paciente {
   })
   pacObservaciones: string | null;
 
-  @OneToMany(() => Datosgenerales, (datosgenerales) => datosgenerales.idficha2)
+  @OneToMany(() => Datosgenerales, (datosgenerales) => datosgenerales.idficha)
   datosgenerales: Datosgenerales[];
 
   @OneToMany(() => Enfermeria, (enfermeria) => enfermeria.idficha2)
