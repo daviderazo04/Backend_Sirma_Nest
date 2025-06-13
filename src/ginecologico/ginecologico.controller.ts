@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { GinecologicoService } from './ginecologico.service';
 import { CreateGinecologicoDto } from './dto/create-ginecologico.dto';
 import { UpdateGinecologicoDto } from './dto/update-ginecologico.dto';
 
-@Controller('ginecologico')
+@Controller('api/ginecologico')
 export class GinecologicoController {
   constructor(private readonly ginecologicoService: GinecologicoService) {}
 
@@ -22,7 +22,7 @@ export class GinecologicoController {
     return this.ginecologicoService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateGinecologicoDto: UpdateGinecologicoDto) {
     return this.ginecologicoService.update(+id, updateGinecologicoDto);
   }

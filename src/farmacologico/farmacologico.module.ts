@@ -1,9 +1,17 @@
+// src/farmacologico/farmacologico.module.ts
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { FarmacologicoService } from './farmacologico.service';
-import { FarmacologicoController } from './farmacologico.controller';
+import { FarmacologicoController } from './farmacologico.controller'; // Assuming you have this
+import { Farmacologico } from './entities/farmacologico.entity';
+import { MedicinaModule } from '../medicina/medicina.module'; // Import MedicinaModule
 
 @Module({
-  controllers: [FarmacologicoController],
+  imports: [
+    TypeOrmModule.forFeature([Farmacologico]), // Register the Farmacologico entity with TypeORM
+    MedicinaModule, // Import MedicinaModule to make MedicinaService available for injection
+  ],
+  controllers: [FarmacologicoController], // Assuming you have this
   providers: [FarmacologicoService],
 })
 export class FarmacologicoModule {}

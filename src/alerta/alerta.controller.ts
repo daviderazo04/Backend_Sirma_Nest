@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { AlertaService } from './alerta.service';
 import { CreateAlertaDto } from './dto/create-alerta.dto';
 import { UpdateAlertaDto } from './dto/update-alerta.dto';
 
-@Controller('alerta')
+@Controller('api/alerta')
 export class AlertaController {
   constructor(private readonly alertaService: AlertaService) {}
 
@@ -22,7 +22,7 @@ export class AlertaController {
     return this.alertaService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateAlertaDto: UpdateAlertaDto) {
     return this.alertaService.update(+id, updateAlertaDto);
   }

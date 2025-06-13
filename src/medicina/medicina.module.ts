@@ -13,5 +13,6 @@ import { PacienteModule } from '../paciente/paciente.module';  // Importar el Pa
   ],
   controllers: [MedicinaController],
   providers: [MedicinaService],
+  exports: [MedicinaService], // <--- YOU MUST ADD THIS LINE!
 })
 export class MedicinaModule {}

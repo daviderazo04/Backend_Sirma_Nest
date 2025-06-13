@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { AndrologicoService } from './andrologico.service';
 import { CreateAndrologicoDto } from './dto/create-andrologico.dto';
 import { UpdateAndrologicoDto } from './dto/update-andrologico.dto';
 
-@Controller('andrologico')
+@Controller('api/andrologico')
 export class AndrologicoController {
   constructor(private readonly andrologicoService: AndrologicoService) {}
 
@@ -22,7 +22,7 @@ export class AndrologicoController {
     return this.andrologicoService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateAndrologicoDto: UpdateAndrologicoDto) {
     return this.andrologicoService.update(+id, updateAndrologicoDto);
   }

@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Put, Param, Delete } from '@nestjs/common';
 import { GeneralService } from './general.service';
 import { CreateGeneralDto } from './dto/create-general.dto';
 import { UpdateGeneralDto } from './dto/update-general.dto';
 
-@Controller('general')
+@Controller('api/general')
 export class GeneralController {
   constructor(private readonly generalService: GeneralService) {}
 
@@ -22,7 +22,7 @@ export class GeneralController {
     return this.generalService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateGeneralDto: UpdateGeneralDto) {
     return this.generalService.update(+id, updateGeneralDto);
   }

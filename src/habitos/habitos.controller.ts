@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { HabitosService } from './habitos.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { HabitoService } from './habitos.service';
 import { CreateHabitoDto } from './dto/create-habito.dto';
 import { UpdateHabitoDto } from './dto/update-habito.dto';
 
-@Controller('habitos')
+@Controller('api/habitos-nocivos')
 export class HabitosController {
-  constructor(private readonly habitosService: HabitosService) {}
+  constructor(private readonly habitosService: HabitoService) {}
 
   @Post()
   create(@Body() createHabitoDto: CreateHabitoDto) {
@@ -22,7 +22,7 @@ export class HabitosController {
     return this.habitosService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateHabitoDto: UpdateHabitoDto) {
     return this.habitosService.update(+id, updateHabitoDto);
   }

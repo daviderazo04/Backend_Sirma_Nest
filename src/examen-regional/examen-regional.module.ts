@@ -1,9 +1,17 @@
+// src/examen-regional/examen-regional.module.ts
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm'; // Make sure this is imported
 import { ExamenRegionalService } from './examen-regional.service';
-import { ExamenRegionalController } from './examen-regional.controller';
+import { ExamenRegionalController } from './examen-regional.controller'; // Assuming you have this
+import { Examenregional } from './entities/examen-regional.entity'; // Make sure your entity is imported
+import { MedicinaModule } from '../medicina/medicina.module'; // Import MedicinaModule
 
 @Module({
-  controllers: [ExamenRegionalController],
+  imports: [
+    TypeOrmModule.forFeature([Examenregional]), // Register the Examenregional entity
+    MedicinaModule, // Import MedicinaModule for MedicinaService
+  ],
+  controllers: [ExamenRegionalController], // Assuming you have this
   providers: [ExamenRegionalService],
 })
 export class ExamenRegionalModule {}
