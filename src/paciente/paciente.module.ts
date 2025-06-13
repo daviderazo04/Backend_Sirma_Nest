@@ -11,5 +11,6 @@ import { Paciente } from './entities/paciente.entity';
   ],
   controllers: [PacienteController],
   providers: [PacienteService],
+  exports: [PacienteService], // EXPORTAR EL PACIENTE SERVICE
 })
 export class PacienteModule {}

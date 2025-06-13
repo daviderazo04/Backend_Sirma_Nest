@@ -3,7 +3,7 @@ import { MedicinaService } from './medicina.service';
 import { CreateMedicinaDto } from './dto/create-medicina.dto';
 import { UpdateMedicinaDto } from './dto/update-medicina.dto';
 
-@Controller('medicina')
+@Controller('/api/medicina')
 export class MedicinaController {
   constructor(private readonly medicinaService: MedicinaService) {}
 
