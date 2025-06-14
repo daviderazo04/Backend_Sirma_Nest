@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common'; // <--- Import forwardRef
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlertaService } from './alerta.service';
 import { AlertaController } from './alerta.controller';
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([Alerta]), // Make the AlertaRepository available
-    MedicinaModule, // Import MedicinaModule so MedicinaService can be injected
+    forwardRef(() => MedicinaModule), // Import MedicinaModule so MedicinaService can be injected
   ],
   controllers: [AlertaController],
   providers: [AlertaService],
+  exports: [AlertaService] // <--- Crucial: If other modules need to inject AlertaService
 })
 export class AlertaModule {}

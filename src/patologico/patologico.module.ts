@@ -1,5 +1,5 @@
 // src/patologico/patologico.module.ts
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PatologicoService } from './patologico.service';
 import { PatologicoController } from './patologico.controller'; // Assuming you have this
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([Patologico]), // Make the PatologicoRepository available
-    MedicinaModule, // Import MedicinaModule so MedicinaService can be injected
+    forwardRef(() => MedicinaModule), // Import MedicinaModule so MedicinaService can be injected
   ],
   controllers: [PatologicoController], // Assuming you have this
   providers: [PatologicoService],
+  exports: [PatologicoService]
 })
 export class PatologicoModule {}

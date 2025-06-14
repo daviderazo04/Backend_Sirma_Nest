@@ -1,5 +1,5 @@
 // src/diagnostico/diagnostico.module.ts
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'; // Make sure this is imported
 import { DiagnosticoService } from './diagnostico.service';
 import { DiagnosticoController } from './diagnostico.controller'; // Assuming you have this
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([Diagnostico]), // Register the Diagnostico entity with TypeORM
-    MedicinaModule, // Import MedicinaModule to make MedicinaService available
+    forwardRef(() => MedicinaModule), // Import MedicinaModule to make MedicinaService available
   ],
   controllers: [DiagnosticoController], // Assuming you have this
   providers: [DiagnosticoService],
+  exports: [DiagnosticoService],
 })
 export class DiagnosticoModule {}

@@ -1,5 +1,5 @@
 // src/examen-sistemico/examen-sistemico.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateExamenSistemicoDto } from './dto/create-examen-sistemico.dto';
@@ -12,6 +12,7 @@ export class ExamenSistemicoService {
   constructor(
     @InjectRepository(Examensistemico)
     private examenSistemicoRepository: Repository<Examensistemico>,
+    @Inject(forwardRef(() => MedicinaService))
     private medicinaService: MedicinaService,
   ) {}
 

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateHabitoDto } from './dto/create-habito.dto';
@@ -11,6 +11,7 @@ export class HabitoService {
   constructor(
     @InjectRepository(Habitos)
     private habitosRepository: Repository<Habitos>,
+    @Inject(forwardRef(() => MedicinaService))
     private medicinaService: MedicinaService,
   ) {}
 

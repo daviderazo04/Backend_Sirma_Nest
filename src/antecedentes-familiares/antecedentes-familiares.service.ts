@@ -1,5 +1,5 @@
 // src/antecedentes-familiares/antecedentes-familiares.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAntecedentesFamiliareDto } from './dto/create-antecedentes-familiare.dto'; // Corrected DTO import
@@ -12,6 +12,7 @@ export class AntecedentesfamiliaresService {
   constructor(
     @InjectRepository(Antecedentesfamiliares)
     private antecedentesfamiliaresRepository: Repository<Antecedentesfamiliares>,
+    @Inject(forwardRef(() => MedicinaService))
     private medicinaService: MedicinaService,
   ) {}
 

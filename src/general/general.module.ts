@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GeneralService } from './general.service';
 import { GeneralController } from './general.controller';
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([General]), // Make the GeneralRepository available
-    MedicinaModule, // Import MedicinaModule so MedicinaService can be injected
+    forwardRef(() => MedicinaModule), // Import MedicinaModule so MedicinaService can be injected
   ],
   controllers: [GeneralController],
   providers: [GeneralService],
+  exports: [GeneralService]
 })
 export class GeneralModule {}

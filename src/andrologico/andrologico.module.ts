@@ -1,5 +1,5 @@
 // src/andrologico/andrologico.module.ts
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common'; // <--- Import forwardRef
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AndrologicoService } from './andrologico.service';
 import { AndrologicoController } from './andrologico.controller'; // Assuming you have this
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([Andrologico]), // Register the Andrologico entity with TypeORM
-    MedicinaModule, // Import MedicinaModule to make MedicinaService available for injection
+    forwardRef(() => MedicinaModule), // Import MedicinaModule to make MedicinaService available for injection
   ],
   controllers: [AndrologicoController], // Assuming you have this
   providers: [AndrologicoService],
+  exports: [AndrologicoService]
 })
 export class AndrologicoModule {}

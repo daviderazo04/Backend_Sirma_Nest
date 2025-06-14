@@ -1,5 +1,5 @@
 // src/sindromes-geriatricos/sindromes-geriatricos.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSindromesGeriatricoDto } from './dto/create-sindromes-geriatrico.dto';
@@ -12,6 +12,7 @@ export class SindromesGeriatricosService {
   constructor(
     @InjectRepository(Sindromesgeriatricos)
     private sindromesGeriatricosRepository: Repository<Sindromesgeriatricos>,
+    @Inject(forwardRef(() => MedicinaService))
     private medicinaService: MedicinaService,
   ) {}
 

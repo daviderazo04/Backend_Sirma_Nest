@@ -1,5 +1,5 @@
 // src/examen-sistemico/examen-sistemico.module.ts
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'; // Make sure this is imported
 import { ExamenSistemicoService } from './examen-sistemico.service';
 import { ExamenSistemicoController } from './examen-sistemico.controller'; // Assuming you have this
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([Examensistemico]), // Register the Examensistemico entity
-    MedicinaModule, // Import MedicinaModule for MedicinaService
+    forwardRef(() => MedicinaModule), // Import MedicinaModule for MedicinaService
   ],
   controllers: [ExamenSistemicoController], // Assuming you have this
   providers: [ExamenSistemicoService],
+  exports: [ExamenSistemicoService]
 })
 export class ExamenSistemicoModule {}

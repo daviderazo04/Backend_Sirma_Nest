@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRevisionActualDto } from './dto/create-revision-actual.dto';
@@ -11,6 +11,7 @@ export class RevisionActualService {
   constructor(
     @InjectRepository(Revisionactual)
     private revisionactualRepository: Repository<Revisionactual>,
+    @Inject(forwardRef(() => MedicinaService))
     private medicinaService: MedicinaService,
   ) {}
   

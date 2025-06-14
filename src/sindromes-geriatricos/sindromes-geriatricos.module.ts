@@ -1,5 +1,5 @@
 // src/sindromes-geriatricos/sindromes-geriatricos.module.ts
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SindromesGeriatricosService } from './sindromes-geriatricos.service';
 import { SindromesGeriatricosController } from './sindromes-geriatricos.controller'; // Assuming you have this
@@ -9,9 +9,10 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
 @Module({
   imports: [
     TypeOrmModule.forFeature([Sindromesgeriatricos]), // Register the Sindromesgeriatricos entity
-    MedicinaModule, // Import MedicinaModule for MedicinaService
+    forwardRef(() => MedicinaModule), // Import MedicinaModule for MedicinaService
   ],
   controllers: [SindromesGeriatricosController], // Assuming you have this
   providers: [SindromesGeriatricosService],
+  exports: [SindromesGeriatricosService]
 })
 export class SindromesGeriatricosModule {}
