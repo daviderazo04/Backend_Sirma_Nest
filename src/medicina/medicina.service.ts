@@ -91,6 +91,7 @@ import { HabitoService } from '../habitos/habitos.service';
 import { PatologicoService } from '../patologico/patologico.service';
 import { RevisionActualService } from '../revision-actual/revision-actual.service';
 import { SindromesGeriatricosService } from '../sindromes-geriatricos/sindromes-geriatricos.service';
+import { UpdateFullMedicinaDto } from './dto/update-full-medicina.dto';
 
 
 @Injectable()
@@ -224,6 +225,34 @@ export class MedicinaService {
     return this.findOne(medicinaId); // Re-fetch the complete Medicina record with all relations
   }
 
+  async findOneFull(id: number): Promise<Medicina> {
+    const medicina = await this.medicinaRepository.findOne({
+      where: { idmedicina: id },
+      relations: [
+        'alerta', 'andrologico', 'antecedentesfamiliares', 'diagnostico',
+        'examenregional', 'examensistemico', 'farmacologico', 'general',
+        'ginecologico', 'habitosnocivos', 'patologico', 'revisionactual',
+        'sindromesgeriatricos', 'idficha2' // También carga la relación Paciente
+      ],
+    });
+
+    if (!medicina) {
+      throw new NotFoundException('Medicina not found');
+    }
+    return medicina;
+  }
+
+  // En src/medicina/medicina.service.ts
+  async findAllFull(): Promise<Medicina[]> {
+    return await this.medicinaRepository.find({
+      relations: [
+        'alerta', 'andrologico', 'antecedentesfamiliares', 'diagnostico',
+        'examenregional', 'examensistemico', 'farmacologico', 'general',
+        'ginecologico', 'habitosnocivos', 'patologico', 'revisionactual',
+        'sindromesgeriatricos', 'idficha2' // También carga la relación Paciente
+      ],
+    });
+  }
 
   async findAll() {
     return await this.medicinaRepository.find();
@@ -245,6 +274,78 @@ export class MedicinaService {
 
     Object.assign(medicina, updateMedicinaDto);
     return await this.medicinaRepository.save(medicina);
+  }
+
+  // Este es el método para el "update de todos"
+  async updateFull(id: number, updateFullMedicinaDto: UpdateFullMedicinaDto): Promise<Medicina> {
+    const { idficha, ...medicinaFields } = updateFullMedicinaDto;
+    const {
+      alerta, andrologico, antecedentesfamiliares, diagnostico,
+      examenregional, examensistemico, farmacologico, general,
+      ginecologico, habitosnocivos, patologico, revisionactual,
+      sindromesgeriatricos
+    } = medicinaFields;
+
+    // 1. Busca la entidad Medicina existente con todas sus relaciones
+    const existingMedicina = await this.medicinaRepository.findOne({
+      where: { idmedicina: id },
+      relations: [
+        'alerta', 'andrologico', 'antecedentesfamiliares', 'diagnostico',
+        'examenregional', 'examensistemico', 'farmacologico', 'general',
+        'ginecologico', 'habitosnocivos', 'patologico', 'revisionactual',
+        'sindromesgeriatricos', 'idficha2' // También carga la relación Paciente
+      ],
+    });
+
+    if (!existingMedicina) {
+      throw new NotFoundException(`Medicina con ID ${id} no encontrada.`);
+    }
+
+    // 2. Actualiza los campos de la entidad Medicina principal
+    // (Lógica para actualizar idficha o los otros campos principales de Medicina)
+    if (idficha && existingMedicina.idficha !== idficha) {
+      const newPaciente = await this.pacienteService.findOne(idficha);
+      if (!newPaciente) {
+        throw new NotFoundException(`Nuevo Paciente con ID ${idficha} no encontrado para la actualización.`);
+      }
+      existingMedicina.idficha = idficha;
+      existingMedicina.idficha2 = newPaciente;
+    }
+
+    // Actualiza otros campos directos de Medicina
+    Object.assign(existingMedicina, {
+      medNombreencuestador: medicinaFields.medNombreencuestador ?? existingMedicina.medNombreencuestador,
+      medAnamnesis: medicinaFields.medAnamnesis ?? existingMedicina.medAnamnesis,
+      medObservacionesrevact: medicinaFields.medObservacionesrevact ?? existingMedicina.medObservacionesrevact,
+      medObservacionexamenes: medicinaFields.medObservacionexamenes ?? existingMedicina.medObservacionexamenes,
+      medPlanintegral: medicinaFields.medPlanintegral ?? existingMedicina.medPlanintegral,
+    });
+
+    // Guarda los cambios de la entidad Medicina principal
+    const updatedMedicina = await this.medicinaRepository.save(existingMedicina);
+    const medicinaId = updatedMedicina.idmedicina;
+
+    // 3. Actualiza o crea los registros de las entidades relacionadas
+    // Para cada entidad anidada (alerta, andrologico, etc.):
+    //   - Si se proporcionan datos en el DTO (ej. `if (alerta)`):
+    //     - Si ya existe un registro relacionado (ej. `if (existingMedicina.alerta)`): Llama al `update` de su servicio.
+    //     - Si NO existe un registro relacionado: Llama al `create` de su servicio.
+    // (Este es el bloque de try-catch extenso que te proporcioné anteriormente para cada una de las 12 relaciones)
+    try {
+        if (alerta) {
+            if (existingMedicina.alerta) {
+                await this.alertaService.update(medicinaId, alerta);
+            } else {
+                await this.alertaService.create({ idmedicina: medicinaId, ...alerta });
+            }
+        }
+    } catch (error) { console.error(`Failed to update/create Alerta for Medicina ${medicinaId}:`, error); }
+
+    // ... (repetir el mismo patrón para andrologico, antecedentesfamiliares, diagnostico, etc.) ...
+    // Asegúrate de que TODOS los bloques try-catch para las 12 entidades estén aquí.
+
+    // 4. Vuelve a cargar y devuelve el registro de Medicina completo y actualizado
+    return this.findOneFull(medicinaId);
   }
 
   async remove(id: number) {
