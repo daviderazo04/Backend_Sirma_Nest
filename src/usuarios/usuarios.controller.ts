@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Req } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Usuarios } from './entities/usuario.entity';
@@ -55,7 +55,10 @@ export class UsuariosController {
   ) {
     const usuario = await this.usuariosService.login(userCorreo, userClave);
     if (!usuario) {
-      return { message: 'Credenciales incorrectas o usuario inactivo' };
+      throw new HttpException(
+        { message: 'Credenciales incorrectas o usuario inactivo' },
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     return usuario;
   }
