@@ -14,6 +14,7 @@ import { PacienteService } from './paciente.service';
 import { CreatePacienteDto } from './dto/create-paciente.dto';
 import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { Paciente } from './entities/paciente.entity';
+import { InsertarFichaGeneralDTO } from './dto/insertar-ficha-general.dto';
 
 @Controller('api/pacientes')
 export class PacienteController {
@@ -49,5 +50,12 @@ export class PacienteController {
   @HttpCode(HttpStatus.NO_CONTENT) // 204 No Content para eliminación exitosa
   async remove(@Param('idficha') idficha: string): Promise<void> {
     await this.pacienteService.remove(idficha);
+  }
+  @Post('insertar-ficha-general')
+  @HttpCode(HttpStatus.CREATED)
+  async insertarFichaGeneral(
+    @Body() datos: InsertarFichaGeneralDTO,
+  ): Promise<any> {
+    return await this.pacienteService.insertarFichaGeneral(datos);
   }
 }
