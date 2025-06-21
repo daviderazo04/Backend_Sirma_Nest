@@ -1,15 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { AntecedentesfamiliaresService } from './antecedentes-familiares.service';
 import { CreateAntecedentesFamiliareDto } from './dto/create-antecedentes-familiare.dto';
 import { UpdateAntecedentesFamiliareDto } from './dto/update-antecedentes-familiare.dto';
 
 @Controller('api/antecedentes-familiares')
 export class AntecedentesFamiliaresController {
-  constructor(private readonly antecedentesFamiliaresService: AntecedentesfamiliaresService) {}
+  constructor(
+    private readonly antecedentesFamiliaresService: AntecedentesfamiliaresService,
+  ) {}
 
   @Post()
-  create(@Body() createAntecedentesFamiliareDto: CreateAntecedentesFamiliareDto) {
-    return this.antecedentesFamiliaresService.create(createAntecedentesFamiliareDto);
+  create(
+    @Body() createAntecedentesFamiliareDto: CreateAntecedentesFamiliareDto,
+  ) {
+    return this.antecedentesFamiliaresService.create(
+      createAntecedentesFamiliareDto,
+    );
   }
 
   @Get()
@@ -23,8 +38,14 @@ export class AntecedentesFamiliaresController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateAntecedentesFamiliareDto: UpdateAntecedentesFamiliareDto) {
-    return this.antecedentesFamiliaresService.update(+id, updateAntecedentesFamiliareDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateAntecedentesFamiliareDto: UpdateAntecedentesFamiliareDto,
+  ) {
+    return this.antecedentesFamiliaresService.update(
+      +id,
+      updateAntecedentesFamiliareDto,
+    );
   }
 
   @Delete(':id')

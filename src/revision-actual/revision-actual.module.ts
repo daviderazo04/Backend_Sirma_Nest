@@ -12,6 +12,6 @@ import { MedicinaModule } from '../medicina/medicina.module';
   ],
   controllers: [RevisionActualController],
   providers: [RevisionActualService],
-  exports: [RevisionActualService]
+  exports: [RevisionActualService],
 })
 export class RevisionActualModule {}

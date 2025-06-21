@@ -2,7 +2,6 @@
 import { IsNumber, IsOptional, IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class CreateSindromesGeriatricoNestedDto {
-
   @IsOptional()
   @IsBoolean()
   sgFragilidad?: boolean;

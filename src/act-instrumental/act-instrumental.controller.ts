@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ActInstrumentalService } from './act-instrumental.service';
 import { CreateActInstrumentalDto } from './dto/create-act-instrumental.dto';
 import { UpdateActInstrumentalDto } from './dto/update-act-instrumental.dto';
 
 @Controller('act-instrumental')
 export class ActInstrumentalController {
-  constructor(private readonly actInstrumentalService: ActInstrumentalService) {}
+  constructor(
+    private readonly actInstrumentalService: ActInstrumentalService,
+  ) {}
 
   @Post()
   create(@Body() createActInstrumentalDto: CreateActInstrumentalDto) {
@@ -23,7 +33,10 @@ export class ActInstrumentalController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActInstrumentalDto: UpdateActInstrumentalDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateActInstrumentalDto: UpdateActInstrumentalDto,
+  ) {
     return this.actInstrumentalService.update(+id, updateActInstrumentalDto);
   }
 

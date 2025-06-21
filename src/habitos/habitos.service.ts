@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateHabitoDto } from './dto/create-habito.dto';
@@ -17,13 +22,19 @@ export class HabitoService {
 
   async create(createHabitoDto: CreateHabitoDto): Promise<Habitos> {
     if (!createHabitoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a Habito record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a Habito record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createHabitoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createHabitoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createHabitoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createHabitoDto.idmedicina} not found.`,
+      );
     }
 
     const habitos = this.habitosRepository.create({
@@ -54,7 +65,9 @@ export class HabitoService {
   }
 
   async update(id: number, updateHabitoDto: UpdateHabitoDto): Promise<Habitos> {
-    const habitos = await this.habitosRepository.findOne({ where: { idmedicina: id } });
+    const habitos = await this.habitosRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!habitos) {
       throw new NotFoundException(`Habito record with ID ${id} not found.`);
@@ -66,7 +79,9 @@ export class HabitoService {
   }
 
   async remove(id: number): Promise<Habitos> {
-    const habitos = await this.habitosRepository.findOne({ where: { idmedicina: id } });
+    const habitos = await this.habitosRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!habitos) {
       throw new NotFoundException(`Habito record with ID ${id} not found.`);

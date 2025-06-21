@@ -1,8 +1,16 @@
 // src/andrologico/dto/create-andrologico.dto.ts
-import { IsNumber, IsOptional, IsBoolean, IsString, Length, IsNotEmpty, Min, Max } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  Length,
+  IsNotEmpty,
+  Min,
+  Max,
+} from 'class-validator';
 
 export class CreateAndrologicoNestedDto {
-
   @IsOptional()
   @IsNumber()
   @Min(0) // Assuming age can't be negative

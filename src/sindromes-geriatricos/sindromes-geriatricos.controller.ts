@@ -1,15 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { SindromesGeriatricosService } from './sindromes-geriatricos.service';
 import { CreateSindromesGeriatricoDto } from './dto/create-sindromes-geriatrico.dto';
 import { UpdateSindromesGeriatricoDto } from './dto/update-sindromes-geriatrico.dto';
 
 @Controller('api/sindromes-geriatricos')
 export class SindromesGeriatricosController {
-  constructor(private readonly sindromesGeriatricosService: SindromesGeriatricosService) {}
+  constructor(
+    private readonly sindromesGeriatricosService: SindromesGeriatricosService,
+  ) {}
 
   @Post()
   create(@Body() createSindromesGeriatricoDto: CreateSindromesGeriatricoDto) {
-    return this.sindromesGeriatricosService.create(createSindromesGeriatricoDto);
+    return this.sindromesGeriatricosService.create(
+      createSindromesGeriatricoDto,
+    );
   }
 
   @Get()
@@ -23,8 +36,14 @@ export class SindromesGeriatricosController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateSindromesGeriatricoDto: UpdateSindromesGeriatricoDto) {
-    return this.sindromesGeriatricosService.update(+id, updateSindromesGeriatricoDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateSindromesGeriatricoDto: UpdateSindromesGeriatricoDto,
+  ) {
+    return this.sindromesGeriatricosService.update(
+      +id,
+      updateSindromesGeriatricoDto,
+    );
   }
 
   @Delete(':id')

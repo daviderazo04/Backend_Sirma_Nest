@@ -1,5 +1,10 @@
 // src/sindromes-geriatricos/sindromes-geriatricos.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSindromesGeriatricoDto } from './dto/create-sindromes-geriatrico.dto';
@@ -16,15 +21,23 @@ export class SindromesGeriatricosService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createSindromesGeriatricoDto: CreateSindromesGeriatricoDto): Promise<Sindromesgeriatricos> {
+  async create(
+    createSindromesGeriatricoDto: CreateSindromesGeriatricoDto,
+  ): Promise<Sindromesgeriatricos> {
     if (!createSindromesGeriatricoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a Sindromes Geriatrico record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a Sindromes Geriatrico record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createSindromesGeriatricoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createSindromesGeriatricoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createSindromesGeriatricoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createSindromesGeriatricoDto.idmedicina} not found.`,
+      );
     }
 
     const sindromesGeriatricos = this.sindromesGeriatricosRepository.create({
@@ -42,23 +55,34 @@ export class SindromesGeriatricosService {
   }
 
   async findOne(id: number): Promise<Sindromesgeriatricos> {
-    const sindromesGeriatricos = await this.sindromesGeriatricosRepository.findOne({
-      where: { idmedicina: id },
-      relations: ['idmedicina2'], // Load the associated Medicina entity
-    });
+    const sindromesGeriatricos =
+      await this.sindromesGeriatricosRepository.findOne({
+        where: { idmedicina: id },
+        relations: ['idmedicina2'], // Load the associated Medicina entity
+      });
 
     if (!sindromesGeriatricos) {
-      throw new NotFoundException(`Sindromes Geriatrico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Sindromes Geriatrico record with ID ${id} not found.`,
+      );
     }
 
     return sindromesGeriatricos;
   }
 
-  async update(id: number, updateSindromesGeriatricoDto: UpdateSindromesGeriatricoDto): Promise<Sindromesgeriatricos> {
-    const sindromesGeriatricos = await this.sindromesGeriatricosRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateSindromesGeriatricoDto: UpdateSindromesGeriatricoDto,
+  ): Promise<Sindromesgeriatricos> {
+    const sindromesGeriatricos =
+      await this.sindromesGeriatricosRepository.findOne({
+        where: { idmedicina: id },
+      });
 
     if (!sindromesGeriatricos) {
-      throw new NotFoundException(`Sindromes Geriatrico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Sindromes Geriatrico record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(sindromesGeriatricos, updateSindromesGeriatricoDto);
@@ -67,12 +91,19 @@ export class SindromesGeriatricosService {
   }
 
   async remove(id: number): Promise<Sindromesgeriatricos> {
-    const sindromesGeriatricos = await this.sindromesGeriatricosRepository.findOne({ where: { idmedicina: id } });
+    const sindromesGeriatricos =
+      await this.sindromesGeriatricosRepository.findOne({
+        where: { idmedicina: id },
+      });
 
     if (!sindromesGeriatricos) {
-      throw new NotFoundException(`Sindromes Geriatrico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Sindromes Geriatrico record with ID ${id} not found.`,
+      );
     }
 
-    return await this.sindromesGeriatricosRepository.remove(sindromesGeriatricos);
+    return await this.sindromesGeriatricosRepository.remove(
+      sindromesGeriatricos,
+    );
   }
 }

@@ -13,6 +13,6 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
   ],
   controllers: [AndrologicoController], // Assuming you have this
   providers: [AndrologicoService],
-  exports: [AndrologicoService]
+  exports: [AndrologicoService],
 })
 export class AndrologicoModule {}

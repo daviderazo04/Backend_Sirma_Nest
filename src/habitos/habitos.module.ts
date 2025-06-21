@@ -13,6 +13,6 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
   ],
   controllers: [HabitosController], // Assuming you have this
   providers: [HabitoService],
-  exports: [HabitoService]
+  exports: [HabitoService],
 })
 export class HabitosModule {}

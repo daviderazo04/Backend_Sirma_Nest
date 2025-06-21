@@ -1,5 +1,10 @@
 // src/ginecologico/ginecologico.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGinecologicoDto } from './dto/create-ginecologico.dto';
@@ -16,15 +21,23 @@ export class GinecologicoService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createGinecologicoDto: CreateGinecologicoDto): Promise<Ginecologico> {
+  async create(
+    createGinecologicoDto: CreateGinecologicoDto,
+  ): Promise<Ginecologico> {
     if (!createGinecologicoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a Ginecologico record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a Ginecologico record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createGinecologicoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createGinecologicoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createGinecologicoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createGinecologicoDto.idmedicina} not found.`,
+      );
     }
 
     const ginecologico = this.ginecologicoRepository.create({
@@ -48,17 +61,26 @@ export class GinecologicoService {
     });
 
     if (!ginecologico) {
-      throw new NotFoundException(`Ginecologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Ginecologico record with ID ${id} not found.`,
+      );
     }
 
     return ginecologico;
   }
 
-  async update(id: number, updateGinecologicoDto: UpdateGinecologicoDto): Promise<Ginecologico> {
-    const ginecologico = await this.ginecologicoRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateGinecologicoDto: UpdateGinecologicoDto,
+  ): Promise<Ginecologico> {
+    const ginecologico = await this.ginecologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!ginecologico) {
-      throw new NotFoundException(`Ginecologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Ginecologico record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(ginecologico, updateGinecologicoDto);
@@ -67,10 +89,14 @@ export class GinecologicoService {
   }
 
   async remove(id: number): Promise<Ginecologico> {
-    const ginecologico = await this.ginecologicoRepository.findOne({ where: { idmedicina: id } });
+    const ginecologico = await this.ginecologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!ginecologico) {
-      throw new NotFoundException(`Ginecologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Ginecologico record with ID ${id} not found.`,
+      );
     }
 
     return await this.ginecologicoRepository.remove(ginecologico);

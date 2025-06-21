@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePatologicoDto } from './dto/create-patologico.dto';
@@ -17,13 +22,19 @@ export class PatologicoService {
 
   async create(createPatologicoDto: CreatePatologicoDto): Promise<Patologico> {
     if (!createPatologicoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a Patologico record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a Patologico record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createPatologicoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createPatologicoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createPatologicoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createPatologicoDto.idmedicina} not found.`,
+      );
     }
 
     const patologico = this.patologicoRepository.create({
@@ -53,8 +64,13 @@ export class PatologicoService {
     return patologico;
   }
 
-  async update(id: number, updatePatologicoDto: UpdatePatologicoDto): Promise<Patologico> {
-    const patologico = await this.patologicoRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updatePatologicoDto: UpdatePatologicoDto,
+  ): Promise<Patologico> {
+    const patologico = await this.patologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!patologico) {
       throw new NotFoundException(`Patologico record with ID ${id} not found.`);
@@ -66,7 +82,9 @@ export class PatologicoService {
   }
 
   async remove(id: number): Promise<Patologico> {
-    const patologico = await this.patologicoRepository.findOne({ where: { idmedicina: id } });
+    const patologico = await this.patologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!patologico) {
       throw new NotFoundException(`Patologico record with ID ${id} not found.`);

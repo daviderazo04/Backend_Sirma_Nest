@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { GinecologicoService } from './ginecologico.service';
 import { CreateGinecologicoDto } from './dto/create-ginecologico.dto';
 import { UpdateGinecologicoDto } from './dto/update-ginecologico.dto';
@@ -23,7 +32,10 @@ export class GinecologicoController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateGinecologicoDto: UpdateGinecologicoDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateGinecologicoDto: UpdateGinecologicoDto,
+  ) {
     return this.ginecologicoService.update(+id, updateGinecologicoDto);
   }
 

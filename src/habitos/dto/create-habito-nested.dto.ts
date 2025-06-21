@@ -1,7 +1,13 @@
-import { IsNumber, IsOptional, IsBoolean, IsString, Length, IsNotEmpty } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  Length,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateHabitoNestedDto {
-
   @IsOptional()
   @IsBoolean()
   nocTabaquismo?: boolean;

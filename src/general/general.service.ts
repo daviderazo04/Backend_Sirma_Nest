@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGeneralDto } from './dto/create-general.dto';
@@ -17,13 +22,19 @@ export class GeneralService {
 
   async create(createGeneralDto: CreateGeneralDto): Promise<General> {
     if (!createGeneralDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a General record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a General record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createGeneralDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createGeneralDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createGeneralDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createGeneralDto.idmedicina} not found.`,
+      );
     }
 
     const general = this.generalRepository.create({
@@ -53,8 +64,13 @@ export class GeneralService {
     return general;
   }
 
-  async update(id: number, updateGeneralDto: UpdateGeneralDto): Promise<General> {
-    const general = await this.generalRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateGeneralDto: UpdateGeneralDto,
+  ): Promise<General> {
+    const general = await this.generalRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!general) {
       throw new NotFoundException(`General record with ID ${id} not found.`);
@@ -66,7 +82,9 @@ export class GeneralService {
   }
 
   async remove(id: number): Promise<General> {
-    const general = await this.generalRepository.findOne({ where: { idmedicina: id } });
+    const general = await this.generalRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!general) {
       throw new NotFoundException(`General record with ID ${id} not found.`);

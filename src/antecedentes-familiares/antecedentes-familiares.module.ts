@@ -7,12 +7,13 @@ import { Antecedentesfamiliares } from './entities/antecedentes-familiare.entity
 import { MedicinaModule } from '../medicina/medicina.module'; // <--- ADD THIS IMPORT (For MedicinaService)
 
 @Module({
-  imports: [ // <--- ADD THE 'imports' ARRAY
+  imports: [
+    // <--- ADD THE 'imports' ARRAY
     TypeOrmModule.forFeature([Antecedentesfamiliares]), // <--- ADD THIS LINE
     forwardRef(() => MedicinaModule), // <--- ADD THIS LINE
   ],
   controllers: [AntecedentesFamiliaresController],
   providers: [AntecedentesfamiliaresService],
-  exports: [AntecedentesfamiliaresService]
+  exports: [AntecedentesfamiliaresService],
 })
 export class AntecedentesFamiliaresModule {}

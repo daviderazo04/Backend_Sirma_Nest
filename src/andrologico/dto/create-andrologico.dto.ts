@@ -1,5 +1,14 @@
 // src/andrologico/dto/create-andrologico.dto.ts
-import { IsNumber, IsOptional, IsBoolean, IsString, Length, IsNotEmpty, Min, Max } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  Length,
+  IsNotEmpty,
+  Min,
+  Max,
+} from 'class-validator';
 
 export class CreateAndrologicoDto {
   /**

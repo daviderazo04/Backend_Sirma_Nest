@@ -1,5 +1,10 @@
 // src/examen-sistemico/examen-sistemico.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateExamenSistemicoDto } from './dto/create-examen-sistemico.dto';
@@ -16,15 +21,23 @@ export class ExamenSistemicoService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createExamenSistemicoDto: CreateExamenSistemicoDto): Promise<Examensistemico> {
+  async create(
+    createExamenSistemicoDto: CreateExamenSistemicoDto,
+  ): Promise<Examensistemico> {
     if (!createExamenSistemicoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create an Examen Sistemico record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create an Examen Sistemico record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createExamenSistemicoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createExamenSistemicoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createExamenSistemicoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createExamenSistemicoDto.idmedicina} not found.`,
+      );
     }
 
     const examenSistemico = this.examenSistemicoRepository.create({
@@ -48,17 +61,26 @@ export class ExamenSistemicoService {
     });
 
     if (!examenSistemico) {
-      throw new NotFoundException(`Examen Sistemico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Examen Sistemico record with ID ${id} not found.`,
+      );
     }
 
     return examenSistemico;
   }
 
-  async update(id: number, updateExamenSistemicoDto: UpdateExamenSistemicoDto): Promise<Examensistemico> {
-    const examenSistemico = await this.examenSistemicoRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateExamenSistemicoDto: UpdateExamenSistemicoDto,
+  ): Promise<Examensistemico> {
+    const examenSistemico = await this.examenSistemicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!examenSistemico) {
-      throw new NotFoundException(`Examen Sistemico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Examen Sistemico record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(examenSistemico, updateExamenSistemicoDto);
@@ -67,10 +89,14 @@ export class ExamenSistemicoService {
   }
 
   async remove(id: number): Promise<Examensistemico> {
-    const examenSistemico = await this.examenSistemicoRepository.findOne({ where: { idmedicina: id } });
+    const examenSistemico = await this.examenSistemicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!examenSistemico) {
-      throw new NotFoundException(`Examen Sistemico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Examen Sistemico record with ID ${id} not found.`,
+      );
     }
 
     return await this.examenSistemicoRepository.remove(examenSistemico);

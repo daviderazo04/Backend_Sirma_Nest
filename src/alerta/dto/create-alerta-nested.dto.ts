@@ -1,7 +1,6 @@
 import { IsNumber, IsOptional, IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class CreateAlertaNestedDto {
-
   @IsOptional()
   @IsBoolean()
   alertCaida?: boolean;

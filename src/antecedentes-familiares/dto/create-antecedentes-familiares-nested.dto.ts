@@ -1,7 +1,15 @@
 // src/antecedentes-familiares/dto/create-antecedentes-familiare.dto.ts // Note the file name change to match
-import { IsNumber, IsOptional, IsBoolean, IsString, Length, IsNotEmpty } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  Length,
+  IsNotEmpty,
+} from 'class-validator';
 
-export class CreateAntecedentesFamiliareNestedDto { // Corrected DTO class name
+export class CreateAntecedentesFamiliareNestedDto {
+  // Corrected DTO class name
 
   @IsOptional()
   @IsBoolean()

@@ -1,4 +1,4 @@
-import { Injectable,NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDatosGeneraleDto } from './dto/create-datos-generale.dto';
 import { UpdateDatosGeneraleDto } from './dto/update-datos-generale.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,13 +6,10 @@ import { Datosgenerales } from './entities/datos-generale.entity';
 import { Repository } from 'typeorm';
 @Injectable()
 export class DatosGeneralesService {
-
   constructor(
     @InjectRepository(Datosgenerales)
-    private datosGeneralesRepository:Repository<Datosgenerales>
-  ){
-
-  }
+    private datosGeneralesRepository: Repository<Datosgenerales>,
+  ) {}
 
   async create(dto: CreateDatosGeneraleDto) {
     const nuevo = this.datosGeneralesRepository.create({
@@ -28,7 +25,9 @@ export class DatosGeneralesService {
   }
 
   async findOne(id: number) {
-   const datogeneral = await this.datosGeneralesRepository.findOne({ where: { iddatosgenerales: id } });
+    const datogeneral = await this.datosGeneralesRepository.findOne({
+      where: { iddatosgenerales: id },
+    });
     if (!datogeneral) {
       throw new NotFoundException(`Datogeneral con ID ${id} no encontrada.`);
     }
@@ -42,7 +41,7 @@ export class DatosGeneralesService {
   }
 
   async remove(id: number) {
-   const result = await this.datosGeneralesRepository.delete(id);
+    const result = await this.datosGeneralesRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Datogeneral con ID ${id} no encontrada.`);
     }

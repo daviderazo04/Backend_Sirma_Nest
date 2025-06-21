@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRevisionActualDto } from './dto/create-revision-actual.dto';
@@ -14,16 +19,24 @@ export class RevisionActualService {
     @Inject(forwardRef(() => MedicinaService))
     private medicinaService: MedicinaService,
   ) {}
-  
-  async create(createRevisionactualDto: CreateRevisionActualDto): Promise<Revisionactual> {
+
+  async create(
+    createRevisionactualDto: CreateRevisionActualDto,
+  ): Promise<Revisionactual> {
     if (!createRevisionactualDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a Revision Actual record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a Revision Actual record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createRevisionactualDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createRevisionactualDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createRevisionactualDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createRevisionactualDto.idmedicina} not found.`,
+      );
     }
 
     const revisionactual = this.revisionactualRepository.create({
@@ -53,8 +66,13 @@ export class RevisionActualService {
     return revisionactual;
   }
 
-  async update(id: number, updateRevisionactualDto: UpdateRevisionActualDto): Promise<Revisionactual> {
-    const revisionactual = await this.revisionactualRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateRevisionactualDto: UpdateRevisionActualDto,
+  ): Promise<Revisionactual> {
+    const revisionactual = await this.revisionactualRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!revisionactual) {
       throw new NotFoundException(`Revision Actual with ID ${id} not found.`);
@@ -66,7 +84,9 @@ export class RevisionActualService {
   }
 
   async remove(id: number): Promise<Revisionactual> {
-    const revisionactual = await this.revisionactualRepository.findOne({ where: { idmedicina: id } });
+    const revisionactual = await this.revisionactualRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!revisionactual) {
       throw new NotFoundException(`Revision Actual with ID ${id} not found.`);

@@ -23,14 +23,21 @@ export class PacienteService {
   }
 
   async findOne(idficha: string): Promise<Paciente> {
-    const paciente = await this.pacienteRepository.findOne({ where: { idficha } });
+    const paciente = await this.pacienteRepository.findOne({
+      where: { idficha },
+    });
     if (!paciente) {
-      throw new NotFoundException(`Paciente con ID de ficha "${idficha}" no encontrado.`);
+      throw new NotFoundException(
+        `Paciente con ID de ficha "${idficha}" no encontrado.`,
+      );
     }
     return paciente;
   }
 
-  async update(idficha: string, updatePacienteDto: UpdatePacienteDto): Promise<Paciente> {
+  async update(
+    idficha: string,
+    updatePacienteDto: UpdatePacienteDto,
+  ): Promise<Paciente> {
     const paciente = await this.findOne(idficha); // Reusa findOne para verificar existencia
     Object.assign(paciente, updatePacienteDto);
     return await this.pacienteRepository.save(paciente);
@@ -39,7 +46,9 @@ export class PacienteService {
   async remove(idficha: string): Promise<void> {
     const result = await this.pacienteRepository.delete(idficha);
     if (result.affected === 0) {
-      throw new NotFoundException(`Paciente con ID de ficha "${idficha}" no encontrado.`);
+      throw new NotFoundException(
+        `Paciente con ID de ficha "${idficha}" no encontrado.`,
+      );
     }
   }
 }

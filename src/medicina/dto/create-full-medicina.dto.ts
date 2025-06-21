@@ -1,5 +1,11 @@
 // src/medicina/dto/create-full-medicina.dto.ts
-import { IsString, IsOptional, Length, IsNotEmpty, ValidateNested } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  Length,
+  IsNotEmpty,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 // Import all your nested DTOs (replace paths as necessary)
@@ -16,7 +22,6 @@ import { CreateHabitoNestedDto } from '../../habitos/dto/create-habito-nested.dt
 import { CreatePatologicoNestedDto } from '../../patologico/dto/create-patologico-nested.dto';
 import { CreateRevisionActualNestedDto } from '../../revision-actual/dto/create-revision-actual-nested.dto';
 import { CreateSindromesGeriatricoNestedDto } from '../../sindromes-geriatricos/dto/create-sindromes-geriatrico-nested.dto';
-
 
 export class CreateFullMedicinaDto {
   // Fields for the main Medicina entity (from your original CreateMedicinaDto)
@@ -49,7 +54,6 @@ export class CreateFullMedicinaDto {
   @IsString()
   @Length(1, 1000)
   medPlanintegral?: string;
-
 
   // Nested DTOs for one-to-one relationships (all optional in the main request)
   @IsOptional()

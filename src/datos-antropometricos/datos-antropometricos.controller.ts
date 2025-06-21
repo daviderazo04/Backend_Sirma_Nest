@@ -1,15 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DatosAntropometricosService } from './datos-antropometricos.service';
 import { CreateDatosAntropometricoDto } from './dto/create-datos-antropometrico.dto';
 import { UpdateDatosAntropometricoDto } from './dto/update-datos-antropometrico.dto';
 
 @Controller('datos-antropometricos')
 export class DatosAntropometricosController {
-  constructor(private readonly datosAntropometricosService: DatosAntropometricosService) {}
+  constructor(
+    private readonly datosAntropometricosService: DatosAntropometricosService,
+  ) {}
 
   @Post()
   create(@Body() createDatosAntropometricoDto: CreateDatosAntropometricoDto) {
-    return this.datosAntropometricosService.create(createDatosAntropometricoDto);
+    return this.datosAntropometricosService.create(
+      createDatosAntropometricoDto,
+    );
   }
 
   @Get()
@@ -23,8 +35,14 @@ export class DatosAntropometricosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDatosAntropometricoDto: UpdateDatosAntropometricoDto) {
-    return this.datosAntropometricosService.update(+id, updateDatosAntropometricoDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateDatosAntropometricoDto: UpdateDatosAntropometricoDto,
+  ) {
+    return this.datosAntropometricosService.update(
+      +id,
+      updateDatosAntropometricoDto,
+    );
   }
 
   @Delete(':id')

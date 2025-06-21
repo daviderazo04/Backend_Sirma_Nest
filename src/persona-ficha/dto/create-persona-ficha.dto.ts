@@ -1,5 +1,11 @@
 // src/persona-ficha/dto/create-persona-ficha.dto.ts
-import { IsString, IsNumber, IsOptional, Length, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsOptional,
+  Length,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreatePersonaFichaDto {
   @IsNotEmpty()

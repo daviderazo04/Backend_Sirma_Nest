@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AntecedentesNutriService } from './antecedentes-nutri.service';
 import { CreateAntecedentesNutriDto } from './dto/create-antecedentes-nutri.dto';
 import { UpdateAntecedentesNutriDto } from './dto/update-antecedentes-nutri.dto';
 
 @Controller('antecedentes-nutri')
 export class AntecedentesNutriController {
-  constructor(private readonly antecedentesNutriService: AntecedentesNutriService) {}
+  constructor(
+    private readonly antecedentesNutriService: AntecedentesNutriService,
+  ) {}
 
   @Post()
   create(@Body() createAntecedentesNutriDto: CreateAntecedentesNutriDto) {
@@ -23,8 +33,14 @@ export class AntecedentesNutriController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAntecedentesNutriDto: UpdateAntecedentesNutriDto) {
-    return this.antecedentesNutriService.update(+id, updateAntecedentesNutriDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateAntecedentesNutriDto: UpdateAntecedentesNutriDto,
+  ) {
+    return this.antecedentesNutriService.update(
+      +id,
+      updateAntecedentesNutriDto,
+    );
   }
 
   @Delete(':id')

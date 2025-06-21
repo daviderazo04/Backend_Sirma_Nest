@@ -23,14 +23,19 @@ export class PersonaService {
   }
 
   async findOne(id: number): Promise<Persona> {
-    const persona = await this.personaRepository.findOne({ where: { idpersona: id } });
+    const persona = await this.personaRepository.findOne({
+      where: { idpersona: id },
+    });
     if (!persona) {
       throw new NotFoundException(`Persona con ID ${id} no encontrada.`);
     }
     return persona;
   }
 
-  async update(id: number, updatePersonaDto: UpdatePersonaDto): Promise<Persona> {
+  async update(
+    id: number,
+    updatePersonaDto: UpdatePersonaDto,
+  ): Promise<Persona> {
     const persona = await this.findOne(id); // Reusa findOne para verificar existencia
     Object.assign(persona, updatePersonaDto);
     return await this.personaRepository.save(persona);
@@ -41,5 +46,16 @@ export class PersonaService {
     if (result.affected === 0) {
       throw new NotFoundException(`Persona con ID ${id} no encontrada.`);
     }
+  }
+  async findByCedula(cedula: string): Promise<Persona> {
+    const persona = await this.personaRepository.findOne({
+      where: { perCedula: cedula },
+    });
+    if (!persona) {
+      throw new NotFoundException(
+        `Persona con cédula ${cedula} no encontrada.`,
+      );
+    }
+    return persona;
   }
 }

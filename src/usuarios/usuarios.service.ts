@@ -1,4 +1,8 @@
-import { Injectable, ForbiddenException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Usuarios } from './entities/usuario.entity';
@@ -11,19 +15,27 @@ export class UsuariosService {
     private usuariosRepository: Repository<Usuarios>,
   ) {}
 
-  async create(createUsuarioDto: CreateUsuarioDto, creador?: Usuarios | null): Promise<Usuarios> {
+  async create(
+    createUsuarioDto: CreateUsuarioDto,
+    creador?: Usuarios | null,
+  ): Promise<Usuarios> {
     if (!creador) {
       createUsuarioDto.userRol = 'usuario';
     } else {
       const allowedRoles = ['admin', 'doctor'];
       if (!creador.userRol || !allowedRoles.includes(creador.userRol)) {
-        throw new ForbiddenException('No tienes permisos para crear usuarios con roles especiales');
+        throw new ForbiddenException(
+          'No tienes permisos para crear usuarios con roles especiales',
+        );
       }
       if (
         creador.userRol === 'doctor' &&
-        (!createUsuarioDto.userRol || !['doctor', 'estudiante'].includes(createUsuarioDto.userRol))
+        (!createUsuarioDto.userRol ||
+          !['doctor', 'estudiante'].includes(createUsuarioDto.userRol))
       ) {
-        throw new ForbiddenException('El doctor solo puede crear doctores o estudiantes');
+        throw new ForbiddenException(
+          'El doctor solo puede crear doctores o estudiantes',
+        );
       }
     }
     // Estado activo por defecto
@@ -42,20 +54,32 @@ export class UsuariosService {
     return this.usuariosRepository.findOneBy({ idusuario });
   }
 
-  async update(idusuario: number, updateDto: Partial<CreateUsuarioDto>, modificador: Usuarios | null): Promise<Usuarios> {
+  async update(
+    idusuario: number,
+    updateDto: Partial<CreateUsuarioDto>,
+    modificador: Usuarios | null,
+  ): Promise<Usuarios> {
     const usuario = await this.usuariosRepository.findOneBy({ idusuario });
     if (!usuario) throw new NotFoundException('Usuario no encontrado');
 
     if (updateDto.userRol) {
       const allowedRoles = ['admin', 'doctor'];
-      if (!modificador || !modificador.userRol || !allowedRoles.includes(modificador.userRol)) {
-        throw new ForbiddenException('No tienes permisos para actualizar el rol de este usuario');
+      if (
+        !modificador ||
+        !modificador.userRol ||
+        !allowedRoles.includes(modificador.userRol)
+      ) {
+        throw new ForbiddenException(
+          'No tienes permisos para actualizar el rol de este usuario',
+        );
       }
       if (
         modificador.userRol === 'doctor' &&
         !['doctor', 'estudiante'].includes(updateDto.userRol)
       ) {
-        throw new ForbiddenException('El doctor solo puede asignar roles de doctor o estudiante');
+        throw new ForbiddenException(
+          'El doctor solo puede asignar roles de doctor o estudiante',
+        );
       }
     }
 
@@ -69,7 +93,9 @@ export class UsuariosService {
     if (!usuario) throw new NotFoundException('Usuario no encontrado');
 
     if (!eliminador || eliminador.userRol !== 'admin') {
-      throw new ForbiddenException('Solo un administrador puede eliminar usuarios');
+      throw new ForbiddenException(
+        'Solo un administrador puede eliminar usuarios',
+      );
     }
 
     usuario.userEstado = 'inactivo';

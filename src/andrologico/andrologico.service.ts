@@ -1,5 +1,10 @@
 // src/andrologico/andrologico.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAndrologicoDto } from './dto/create-andrologico.dto';
@@ -16,15 +21,23 @@ export class AndrologicoService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createAndrologicoDto: CreateAndrologicoDto): Promise<Andrologico> {
+  async create(
+    createAndrologicoDto: CreateAndrologicoDto,
+  ): Promise<Andrologico> {
     if (!createAndrologicoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create an Andrologico record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create an Andrologico record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createAndrologicoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createAndrologicoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createAndrologicoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createAndrologicoDto.idmedicina} not found.`,
+      );
     }
 
     const andrologico = this.andrologicoRepository.create({
@@ -48,17 +61,26 @@ export class AndrologicoService {
     });
 
     if (!andrologico) {
-      throw new NotFoundException(`Andrologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Andrologico record with ID ${id} not found.`,
+      );
     }
 
     return andrologico;
   }
 
-  async update(id: number, updateAndrologicoDto: UpdateAndrologicoDto): Promise<Andrologico> {
-    const andrologico = await this.andrologicoRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateAndrologicoDto: UpdateAndrologicoDto,
+  ): Promise<Andrologico> {
+    const andrologico = await this.andrologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!andrologico) {
-      throw new NotFoundException(`Andrologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Andrologico record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(andrologico, updateAndrologicoDto);
@@ -67,10 +89,14 @@ export class AndrologicoService {
   }
 
   async remove(id: number): Promise<Andrologico> {
-    const andrologico = await this.andrologicoRepository.findOne({ where: { idmedicina: id } });
+    const andrologico = await this.andrologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!andrologico) {
-      throw new NotFoundException(`Andrologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Andrologico record with ID ${id} not found.`,
+      );
     }
 
     return await this.andrologicoRepository.remove(andrologico);

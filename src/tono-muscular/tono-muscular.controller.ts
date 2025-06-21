@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TonoMuscularService } from './tono-muscular.service';
 import { CreateTonoMuscularDto } from './dto/create-tono-muscular.dto';
 import { UpdateTonoMuscularDto } from './dto/update-tono-muscular.dto';
@@ -23,7 +31,10 @@ export class TonoMuscularController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTonoMuscularDto: UpdateTonoMuscularDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTonoMuscularDto: UpdateTonoMuscularDto,
+  ) {
     return this.tonoMuscularService.update(+id, updateTonoMuscularDto);
   }
 

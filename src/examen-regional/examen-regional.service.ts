@@ -1,5 +1,10 @@
 // src/examen-regional/examen-regional.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateExamenRegionalDto } from './dto/create-examen-regional.dto';
@@ -16,15 +21,23 @@ export class ExamenRegionalService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createExamenRegionalDto: CreateExamenRegionalDto): Promise<Examenregional> {
+  async create(
+    createExamenRegionalDto: CreateExamenRegionalDto,
+  ): Promise<Examenregional> {
     if (!createExamenRegionalDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create an Examen Regional record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create an Examen Regional record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createExamenRegionalDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createExamenRegionalDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createExamenRegionalDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createExamenRegionalDto.idmedicina} not found.`,
+      );
     }
 
     const examenRegional = this.examenRegionalRepository.create({
@@ -48,17 +61,26 @@ export class ExamenRegionalService {
     });
 
     if (!examenRegional) {
-      throw new NotFoundException(`Examen Regional record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Examen Regional record with ID ${id} not found.`,
+      );
     }
 
     return examenRegional;
   }
 
-  async update(id: number, updateExamenRegionalDto: UpdateExamenRegionalDto): Promise<Examenregional> {
-    const examenRegional = await this.examenRegionalRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateExamenRegionalDto: UpdateExamenRegionalDto,
+  ): Promise<Examenregional> {
+    const examenRegional = await this.examenRegionalRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!examenRegional) {
-      throw new NotFoundException(`Examen Regional record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Examen Regional record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(examenRegional, updateExamenRegionalDto);
@@ -67,10 +89,14 @@ export class ExamenRegionalService {
   }
 
   async remove(id: number): Promise<Examenregional> {
-    const examenRegional = await this.examenRegionalRepository.findOne({ where: { idmedicina: id } });
+    const examenRegional = await this.examenRegionalRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!examenRegional) {
-      throw new NotFoundException(`Examen Regional record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Examen Regional record with ID ${id} not found.`,
+      );
     }
 
     return await this.examenRegionalRepository.remove(examenRegional);

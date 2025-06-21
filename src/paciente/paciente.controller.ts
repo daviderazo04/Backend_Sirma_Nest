@@ -21,7 +21,9 @@ export class PacienteController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() createPacienteDto: CreatePacienteDto): Promise<Paciente> {
+  async create(
+    @Body() createPacienteDto: CreatePacienteDto,
+  ): Promise<Paciente> {
     return await this.pacienteService.create(createPacienteDto);
   }
 

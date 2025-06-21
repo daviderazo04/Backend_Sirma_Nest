@@ -2,10 +2,10 @@
 import { IsString, IsOptional, Length, IsNotEmpty } from 'class-validator';
 
 export class CreateMedicinaDto {
-  @IsNotEmpty()  // Asegurarte de que `idficha` no esté vacío si es obligatorio
-  @IsString()    // `idficha` es un string
-  @Length(1, 6)  // La longitud mínima de 1 y máxima de 6, según tu esquema de base de datos
-  idficha: string;  // `idficha` debe ser un string, que es el ID del paciente
+  @IsNotEmpty() // Asegurarte de que `idficha` no esté vacío si es obligatorio
+  @IsString() // `idficha` es un string
+  @Length(1, 6) // La longitud mínima de 1 y máxima de 6, según tu esquema de base de datos
+  idficha: string; // `idficha` debe ser un string, que es el ID del paciente
 
   @IsOptional()
   @IsString()

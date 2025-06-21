@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { FisioterapiaService } from './fisioterapia.service';
 import { CreateFisioterapiaDto } from './dto/create-fisioterapia.dto';
 import { UpdateFisioterapiaDto } from './dto/update-fisioterapia.dto';
@@ -23,7 +31,10 @@ export class FisioterapiaController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFisioterapiaDto: UpdateFisioterapiaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateFisioterapiaDto: UpdateFisioterapiaDto,
+  ) {
     return this.fisioterapiaService.update(+id, updateFisioterapiaDto);
   }
 

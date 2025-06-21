@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SeguimientoFisioterapiaService } from './seguimiento-fisioterapia.service';
 import { CreateSeguimientoFisioterapiaDto } from './dto/create-seguimiento-fisioterapia.dto';
 import { UpdateSeguimientoFisioterapiaDto } from './dto/update-seguimiento-fisioterapia.dto';
 
 @Controller('seguimiento-fisioterapia')
 export class SeguimientoFisioterapiaController {
-  constructor(private readonly seguimientoFisioterapiaService: SeguimientoFisioterapiaService) {}
+  constructor(
+    private readonly seguimientoFisioterapiaService: SeguimientoFisioterapiaService,
+  ) {}
 
   @Post()
-  create(@Body() createSeguimientoFisioterapiaDto: CreateSeguimientoFisioterapiaDto) {
-    return this.seguimientoFisioterapiaService.create(createSeguimientoFisioterapiaDto);
+  create(
+    @Body() createSeguimientoFisioterapiaDto: CreateSeguimientoFisioterapiaDto,
+  ) {
+    return this.seguimientoFisioterapiaService.create(
+      createSeguimientoFisioterapiaDto,
+    );
   }
 
   @Get()
@@ -23,8 +37,14 @@ export class SeguimientoFisioterapiaController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSeguimientoFisioterapiaDto: UpdateSeguimientoFisioterapiaDto) {
-    return this.seguimientoFisioterapiaService.update(+id, updateSeguimientoFisioterapiaDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateSeguimientoFisioterapiaDto: UpdateSeguimientoFisioterapiaDto,
+  ) {
+    return this.seguimientoFisioterapiaService.update(
+      +id,
+      updateSeguimientoFisioterapiaDto,
+    );
   }
 
   @Delete(':id')

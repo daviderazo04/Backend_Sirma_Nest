@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RecursoSocialService } from './recurso-social.service';
 import { CreateRecursoSocialDto } from './dto/create-recurso-social.dto';
 import { UpdateRecursoSocialDto } from './dto/update-recurso-social.dto';
@@ -23,7 +31,10 @@ export class RecursoSocialController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecursoSocialDto: UpdateRecursoSocialDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRecursoSocialDto: UpdateRecursoSocialDto,
+  ) {
     return this.recursoSocialService.update(+id, updateRecursoSocialDto);
   }
 

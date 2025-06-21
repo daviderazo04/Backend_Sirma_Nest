@@ -5,7 +5,6 @@ import { AlertaController } from './alerta.controller';
 import { Alerta } from './entities/alerta.entity';
 import { MedicinaModule } from '../medicina/medicina.module'; // Import MedicinaModule
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([Alerta]), // Make the AlertaRepository available
@@ -13,6 +12,6 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
   ],
   controllers: [AlertaController],
   providers: [AlertaService],
-  exports: [AlertaService] // <--- Crucial: If other modules need to inject AlertaService
+  exports: [AlertaService], // <--- Crucial: If other modules need to inject AlertaService
 })
 export class AlertaModule {}

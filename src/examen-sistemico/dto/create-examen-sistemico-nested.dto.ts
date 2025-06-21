@@ -1,8 +1,13 @@
 // src/examen-sistemico/dto/create-examen-sistemico.dto.ts
-import { IsNumber, IsOptional, IsString, Length, IsNotEmpty } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateExamenSistemicoNestedDto {
-
   @IsOptional()
   @IsString()
   @Length(1, 10)

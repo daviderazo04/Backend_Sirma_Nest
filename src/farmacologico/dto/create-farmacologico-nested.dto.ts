@@ -1,8 +1,14 @@
 // src/farmacologico/dto/create-farmacologico.dto.ts
-import { IsNumber, IsOptional, IsBoolean, IsString, Length, IsNotEmpty } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  Length,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateFarmacologicoNestedDto {
-
   @IsOptional()
   @IsBoolean()
   farAines?: boolean;

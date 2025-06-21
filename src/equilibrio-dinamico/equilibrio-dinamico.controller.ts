@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { EquilibrioDinamicoService } from './equilibrio-dinamico.service';
 import { CreateEquilibrioDinamicoDto } from './dto/create-equilibrio-dinamico.dto';
 import { UpdateEquilibrioDinamicoDto } from './dto/update-equilibrio-dinamico.dto';
 
 @Controller('equilibrio-dinamico')
 export class EquilibrioDinamicoController {
-  constructor(private readonly equilibrioDinamicoService: EquilibrioDinamicoService) {}
+  constructor(
+    private readonly equilibrioDinamicoService: EquilibrioDinamicoService,
+  ) {}
 
   @Post()
   create(@Body() createEquilibrioDinamicoDto: CreateEquilibrioDinamicoDto) {
@@ -23,8 +33,14 @@ export class EquilibrioDinamicoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEquilibrioDinamicoDto: UpdateEquilibrioDinamicoDto) {
-    return this.equilibrioDinamicoService.update(+id, updateEquilibrioDinamicoDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateEquilibrioDinamicoDto: UpdateEquilibrioDinamicoDto,
+  ) {
+    return this.equilibrioDinamicoService.update(
+      +id,
+      updateEquilibrioDinamicoDto,
+    );
   }
 
   @Delete(':id')

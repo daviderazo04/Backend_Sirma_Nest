@@ -19,7 +19,7 @@ export class MedicinaModule {}
 */
 
 // src/medicina/medicina.module.ts
-import { Module, forwardRef  } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { MedicinaService } from './medicina.service';
 import { MedicinaController } from './medicina.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -40,7 +40,6 @@ import { HabitosModule } from '../habitos/habitos.module';
 import { PatologicoModule } from '../patologico/patologico.module';
 import { RevisionActualModule } from '../revision-actual/revision-actual.module';
 import { SindromesGeriatricosModule } from '../sindromes-geriatricos/sindromes-geriatricos.module';
-
 
 @Module({
   imports: [

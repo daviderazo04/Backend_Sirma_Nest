@@ -85,5 +85,4 @@ export class CreatePersonaDto {
   @IsString()
   @Length(1, 80)
   perCuidador?: string;
-
 }

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CognitivoService } from './cognitivo.service';
 import { CreateCognitivoDto } from './dto/create-cognitivo.dto';
 import { UpdateCognitivoDto } from './dto/update-cognitivo.dto';
@@ -23,7 +31,10 @@ export class CognitivoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCognitivoDto: UpdateCognitivoDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCognitivoDto: UpdateCognitivoDto,
+  ) {
     return this.cognitivoService.update(+id, updateCognitivoDto);
   }
 

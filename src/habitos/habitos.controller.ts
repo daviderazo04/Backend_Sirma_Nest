@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { HabitoService } from './habitos.service';
 import { CreateHabitoDto } from './dto/create-habito.dto';
 import { UpdateHabitoDto } from './dto/update-habito.dto';

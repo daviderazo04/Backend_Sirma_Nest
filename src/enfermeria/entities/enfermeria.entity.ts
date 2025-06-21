@@ -1,12 +1,12 @@
-import { Actbasicas } from "src/act-basicas/entities/act-basica.entity";
-import { Actinstrumental } from "src/act-instrumental/entities/act-instrumental.entity";
-import { Cognitivo } from "src/cognitivo/entities/cognitivo.entity";
-import { Depresion } from "src/depresion/entities/depresion.entity";
-import { Otrosriesgos } from "src/otros-riesgos/entities/otros-riesgo.entity";
+import { Actbasicas } from 'src/act-basicas/entities/act-basica.entity';
+import { Actinstrumental } from 'src/act-instrumental/entities/act-instrumental.entity';
+import { Cognitivo } from 'src/cognitivo/entities/cognitivo.entity';
+import { Depresion } from 'src/depresion/entities/depresion.entity';
+import { Otrosriesgos } from 'src/otros-riesgos/entities/otros-riesgo.entity';
 
-import { Paciente } from "src/paciente/entities/paciente.entity";
-import { Recursosocial } from "src/recurso-social/entities/recurso-social.entity";
-import { Tamizaje } from "src/tamizaje/entities/tamizaje.entity";
+import { Paciente } from 'src/paciente/entities/paciente.entity';
+import { Recursosocial } from 'src/recurso-social/entities/recurso-social.entity';
+import { Tamizaje } from 'src/tamizaje/entities/tamizaje.entity';
 import {
   Column,
   Entity,
@@ -15,20 +15,19 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
-} from "typeorm";
+} from 'typeorm';
 
-
-@Index("FK_ENFERMER_PACIENTE__PACIENTE", ["idficha"], {})
-@Entity("ENFERMERIA", { schema: "Sirma" })
+@Index('FK_ENFERMER_PACIENTE__PACIENTE', ['idficha'], {})
+@Entity('ENFERMERIA', { schema: 'Sirma' })
 export class Enfermeria {
-  @PrimaryGeneratedColumn({ type: "int", name: "IDENFERMERIA" })
+  @PrimaryGeneratedColumn({ type: 'int', name: 'IDENFERMERIA' })
   idenfermeria: number;
 
-  @Column("varchar", { name: "IDFICHA", length: 6 })
+  @Column('varchar', { name: 'IDFICHA', length: 6 })
   idficha: string;
 
-  @Column("varchar", {
-    name: "ENF_NOMBREENCUESTADOR",
+  @Column('varchar', {
+    name: 'ENF_NOMBREENCUESTADOR',
     nullable: true,
     length: 50,
   })
@@ -39,7 +38,7 @@ export class Enfermeria {
 
   @OneToOne(
     () => Actinstrumental,
-    (actinstrumental) => actinstrumental.idenfermeria2
+    (actinstrumental) => actinstrumental.idenfermeria2,
   )
   actinstrumental: Actinstrumental;
 
@@ -50,10 +49,10 @@ export class Enfermeria {
   depresion: Depresion;
 
   @ManyToOne(() => Paciente, (paciente) => paciente.enfermerias, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: 'RESTRICT',
+    onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: "IDFICHA", referencedColumnName: "idficha" }])
+  @JoinColumn([{ name: 'IDFICHA', referencedColumnName: 'idficha' }])
   idficha2: Paciente;
 
   @OneToOne(() => Otrosriesgos, (otrosriesgos) => otrosriesgos.idenfermeria2)

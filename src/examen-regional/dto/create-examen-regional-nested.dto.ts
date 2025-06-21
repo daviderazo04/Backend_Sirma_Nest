@@ -2,7 +2,6 @@
 import { IsNumber, IsOptional, IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class CreateExamenRegionalNestedDto {
-
   @IsOptional()
   @IsBoolean()
   exrPiel?: boolean;

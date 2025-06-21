@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { ExamenRegionalService } from './examen-regional.service';
 import { CreateExamenRegionalDto } from './dto/create-examen-regional.dto';
 import { UpdateExamenRegionalDto } from './dto/update-examen-regional.dto';
@@ -23,7 +32,10 @@ export class ExamenRegionalController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateExamenRegionalDto: UpdateExamenRegionalDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateExamenRegionalDto: UpdateExamenRegionalDto,
+  ) {
     return this.examenRegionalService.update(+id, updateExamenRegionalDto);
   }
 

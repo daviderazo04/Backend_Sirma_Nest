@@ -1,5 +1,10 @@
 // src/farmacologico/farmacologico.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateFarmacologicoDto } from './dto/create-farmacologico.dto';
@@ -16,15 +21,23 @@ export class FarmacologicoService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createFarmacologicoDto: CreateFarmacologicoDto): Promise<Farmacologico> {
+  async create(
+    createFarmacologicoDto: CreateFarmacologicoDto,
+  ): Promise<Farmacologico> {
     if (!createFarmacologicoDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create a Farmacologico record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create a Farmacologico record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createFarmacologicoDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createFarmacologicoDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createFarmacologicoDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createFarmacologicoDto.idmedicina} not found.`,
+      );
     }
 
     const farmacologico = this.farmacologicoRepository.create({
@@ -48,17 +61,26 @@ export class FarmacologicoService {
     });
 
     if (!farmacologico) {
-      throw new NotFoundException(`Farmacologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Farmacologico record with ID ${id} not found.`,
+      );
     }
 
     return farmacologico;
   }
 
-  async update(id: number, updateFarmacologicoDto: UpdateFarmacologicoDto): Promise<Farmacologico> {
-    const farmacologico = await this.farmacologicoRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateFarmacologicoDto: UpdateFarmacologicoDto,
+  ): Promise<Farmacologico> {
+    const farmacologico = await this.farmacologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!farmacologico) {
-      throw new NotFoundException(`Farmacologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Farmacologico record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(farmacologico, updateFarmacologicoDto);
@@ -67,10 +89,14 @@ export class FarmacologicoService {
   }
 
   async remove(id: number): Promise<Farmacologico> {
-    const farmacologico = await this.farmacologicoRepository.findOne({ where: { idmedicina: id } });
+    const farmacologico = await this.farmacologicoRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!farmacologico) {
-      throw new NotFoundException(`Farmacologico record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `Farmacologico record with ID ${id} not found.`,
+      );
     }
 
     return await this.farmacologicoRepository.remove(farmacologico);

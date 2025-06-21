@@ -5,7 +5,6 @@ import { GeneralController } from './general.controller';
 import { General } from './entities/general.entity';
 import { MedicinaModule } from '../medicina/medicina.module'; // Import MedicinaModule
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([General]), // Make the GeneralRepository available
@@ -13,6 +12,6 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
   ],
   controllers: [GeneralController],
   providers: [GeneralService],
-  exports: [GeneralService]
+  exports: [GeneralService],
 })
 export class GeneralModule {}

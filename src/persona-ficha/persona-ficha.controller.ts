@@ -21,7 +21,9 @@ export class PersonaFichaController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() createPersonaFichaDto: CreatePersonaFichaDto): Promise<PersonaFicha> {
+  async create(
+    @Body() createPersonaFichaDto: CreatePersonaFichaDto,
+  ): Promise<PersonaFicha> {
     return await this.personaFichaService.create(createPersonaFichaDto);
   }
 

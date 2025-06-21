@@ -7,9 +7,11 @@ import {
   Length,
   IsInt,
   IsBoolean,
-    IsNotEmpty,
+  IsNotEmpty,
 } from 'class-validator';
-export class UpdateDatosGeneraleDto extends PartialType(CreateDatosGeneraleDto) {
+export class UpdateDatosGeneraleDto extends PartialType(
+  CreateDatosGeneraleDto,
+) {
   @IsNotEmpty()
   @IsString()
   @Length(1, 6)

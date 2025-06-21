@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAlertaDto } from './dto/create-alerta.dto';
@@ -17,13 +22,19 @@ export class AlertaService {
 
   async create(createAlertaDto: CreateAlertaDto): Promise<Alerta> {
     if (!createAlertaDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create an Alerta record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create an Alerta record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createAlertaDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createAlertaDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createAlertaDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createAlertaDto.idmedicina} not found.`,
+      );
     }
 
     const alerta = this.alertaRepository.create({
@@ -54,7 +65,9 @@ export class AlertaService {
   }
 
   async update(id: number, updateAlertaDto: UpdateAlertaDto): Promise<Alerta> {
-    const alerta = await this.alertaRepository.findOne({ where: { idmedicina: id } });
+    const alerta = await this.alertaRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!alerta) {
       throw new NotFoundException(`Alerta record with ID ${id} not found.`);
@@ -66,7 +79,9 @@ export class AlertaService {
   }
 
   async remove(id: number): Promise<Alerta> {
-    const alerta = await this.alertaRepository.findOne({ where: { idmedicina: id } });
+    const alerta = await this.alertaRepository.findOne({
+      where: { idmedicina: id },
+    });
 
     if (!alerta) {
       throw new NotFoundException(`Alerta record with ID ${id} not found.`);

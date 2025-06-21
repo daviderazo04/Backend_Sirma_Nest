@@ -16,7 +16,10 @@ export class DatosAntropometricosService {
     return `This action returns a #${id} datosAntropometrico`;
   }
 
-  update(id: number, updateDatosAntropometricoDto: UpdateDatosAntropometricoDto) {
+  update(
+    id: number,
+    updateDatosAntropometricoDto: UpdateDatosAntropometricoDto,
+  ) {
     return `This action updates a #${id} datosAntropometrico`;
   }
 

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ActBasicasService } from './act-basicas.service';
 import { CreateActBasicaDto } from './dto/create-act-basica.dto';
 import { UpdateActBasicaDto } from './dto/update-act-basica.dto';
@@ -23,7 +31,10 @@ export class ActBasicasController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActBasicaDto: UpdateActBasicaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateActBasicaDto: UpdateActBasicaDto,
+  ) {
     return this.actBasicasService.update(+id, updateActBasicaDto);
   }
 

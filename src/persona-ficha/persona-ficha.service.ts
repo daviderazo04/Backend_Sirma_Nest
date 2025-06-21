@@ -13,8 +13,12 @@ export class PersonaFichaService {
     private readonly personaFichaRepository: Repository<PersonaFicha>,
   ) {}
 
-  async create(createPersonaFichaDto: CreatePersonaFichaDto): Promise<PersonaFicha> {
-    const personaFicha = this.personaFichaRepository.create(createPersonaFichaDto);
+  async create(
+    createPersonaFichaDto: CreatePersonaFichaDto,
+  ): Promise<PersonaFicha> {
+    const personaFicha = this.personaFichaRepository.create(
+      createPersonaFichaDto,
+    );
     return await this.personaFichaRepository.save(personaFicha);
   }
 
@@ -35,7 +39,10 @@ export class PersonaFichaService {
     return personaFicha;
   }
 
-  async update(id: number, updatePersonaFichaDto: UpdatePersonaFichaDto): Promise<PersonaFicha> {
+  async update(
+    id: number,
+    updatePersonaFichaDto: UpdatePersonaFichaDto,
+  ): Promise<PersonaFicha> {
     const personaFicha = await this.findOne(id); // Reusa findOne para verificar existencia y cargar relaciones
     // Para actualizar las relaciones, TypeORM necesita que los IDs existan o que se pasen las entidades completas.
     // Como estamos pasando IDs en el DTO, TypeORM es inteligente y las asocia.

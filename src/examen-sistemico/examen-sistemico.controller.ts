@@ -1,11 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { ExamenSistemicoService } from './examen-sistemico.service';
 import { CreateExamenSistemicoDto } from './dto/create-examen-sistemico.dto';
 import { UpdateExamenSistemicoDto } from './dto/update-examen-sistemico.dto';
 
 @Controller('api/examen-sistemico')
 export class ExamenSistemicoController {
-  constructor(private readonly examenSistemicoService: ExamenSistemicoService) {}
+  constructor(
+    private readonly examenSistemicoService: ExamenSistemicoService,
+  ) {}
 
   @Post()
   create(@Body() createExamenSistemicoDto: CreateExamenSistemicoDto) {
@@ -23,7 +34,10 @@ export class ExamenSistemicoController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateExamenSistemicoDto: UpdateExamenSistemicoDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateExamenSistemicoDto: UpdateExamenSistemicoDto,
+  ) {
     return this.examenSistemicoService.update(+id, updateExamenSistemicoDto);
   }
 

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { OtrosRiesgosService } from './otros-riesgos.service';
 import { CreateOtrosRiesgoDto } from './dto/create-otros-riesgo.dto';
 import { UpdateOtrosRiesgoDto } from './dto/update-otros-riesgo.dto';
@@ -23,7 +31,10 @@ export class OtrosRiesgosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOtrosRiesgoDto: UpdateOtrosRiesgoDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateOtrosRiesgoDto: UpdateOtrosRiesgoDto,
+  ) {
     return this.otrosRiesgosService.update(+id, updateOtrosRiesgoDto);
   }
 

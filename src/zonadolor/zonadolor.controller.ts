@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ZonadolorService } from './zonadolor.service';
 import { CreateZonadolorDto } from './dto/create-zonadolor.dto';
 import { UpdateZonadolorDto } from './dto/update-zonadolor.dto';
@@ -23,7 +31,10 @@ export class ZonadolorController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateZonadolorDto: UpdateZonadolorDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateZonadolorDto: UpdateZonadolorDto,
+  ) {
     return this.zonadolorService.update(+id, updateZonadolorDto);
   }
 

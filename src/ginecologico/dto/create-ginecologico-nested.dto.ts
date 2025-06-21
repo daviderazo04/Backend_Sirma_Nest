@@ -1,8 +1,16 @@
 // src/ginecologico/dto/create-ginecologico.dto.ts
-import { IsNumber, IsOptional, IsBoolean, IsString, Length, IsNotEmpty, Min, Max } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  Length,
+  IsNotEmpty,
+  Min,
+  Max,
+} from 'class-validator';
 
 export class CreateGinecologicoNestedDto {
-
   @IsOptional()
   @IsNumber()
   @Min(0) // Assuming age can't be negative

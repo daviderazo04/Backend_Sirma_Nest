@@ -1,5 +1,10 @@
 // src/antecedentes-familiares/antecedentes-familiares.service.ts
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAntecedentesFamiliareDto } from './dto/create-antecedentes-familiare.dto'; // Corrected DTO import
@@ -16,23 +21,36 @@ export class AntecedentesfamiliaresService {
     private medicinaService: MedicinaService,
   ) {}
 
-  async create(createAntecedentesFamiliareDto: CreateAntecedentesFamiliareDto): Promise<Antecedentesfamiliares> { // Corrected DTO type
+  async create(
+    createAntecedentesFamiliareDto: CreateAntecedentesFamiliareDto,
+  ): Promise<Antecedentesfamiliares> {
+    // Corrected DTO type
     if (!createAntecedentesFamiliareDto.idmedicina) {
-      throw new NotFoundException('Medicina ID is required to create an AntecedentesFamiliares record.');
+      throw new NotFoundException(
+        'Medicina ID is required to create an AntecedentesFamiliares record.',
+      );
     }
 
-    const medicina = await this.medicinaService.findOne(createAntecedentesFamiliareDto.idmedicina);
+    const medicina = await this.medicinaService.findOne(
+      createAntecedentesFamiliareDto.idmedicina,
+    );
 
     if (!medicina) {
-      throw new NotFoundException(`Medicina with ID ${createAntecedentesFamiliareDto.idmedicina} not found.`);
+      throw new NotFoundException(
+        `Medicina with ID ${createAntecedentesFamiliareDto.idmedicina} not found.`,
+      );
     }
 
-    const antecedentesfamiliares = this.antecedentesfamiliaresRepository.create({
-      ...createAntecedentesFamiliareDto,
-      idmedicina2: medicina,
-    });
+    const antecedentesfamiliares = this.antecedentesfamiliaresRepository.create(
+      {
+        ...createAntecedentesFamiliareDto,
+        idmedicina2: medicina,
+      },
+    );
 
-    return await this.antecedentesfamiliaresRepository.save(antecedentesfamiliares);
+    return await this.antecedentesfamiliaresRepository.save(
+      antecedentesfamiliares,
+    );
   }
 
   async findAll(): Promise<Antecedentesfamiliares[]> {
@@ -42,37 +60,57 @@ export class AntecedentesfamiliaresService {
   }
 
   async findOne(id: number): Promise<Antecedentesfamiliares> {
-    const antecedentesfamiliares = await this.antecedentesfamiliaresRepository.findOne({
-      where: { idmedicina: id },
-      relations: ['idmedicina2'],
-    });
+    const antecedentesfamiliares =
+      await this.antecedentesfamiliaresRepository.findOne({
+        where: { idmedicina: id },
+        relations: ['idmedicina2'],
+      });
 
     if (!antecedentesfamiliares) {
-      throw new NotFoundException(`AntecedentesFamiliares record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `AntecedentesFamiliares record with ID ${id} not found.`,
+      );
     }
 
     return antecedentesfamiliares;
   }
 
-  async update(id: number, updateAntecedentesfamiliaresDto: UpdateAntecedentesFamiliareDto): Promise<Antecedentesfamiliares> {
-    const antecedentesfamiliares = await this.antecedentesfamiliaresRepository.findOne({ where: { idmedicina: id } });
+  async update(
+    id: number,
+    updateAntecedentesfamiliaresDto: UpdateAntecedentesFamiliareDto,
+  ): Promise<Antecedentesfamiliares> {
+    const antecedentesfamiliares =
+      await this.antecedentesfamiliaresRepository.findOne({
+        where: { idmedicina: id },
+      });
 
     if (!antecedentesfamiliares) {
-      throw new NotFoundException(`AntecedentesFamiliares record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `AntecedentesFamiliares record with ID ${id} not found.`,
+      );
     }
 
     Object.assign(antecedentesfamiliares, updateAntecedentesfamiliaresDto);
 
-    return await this.antecedentesfamiliaresRepository.save(antecedentesfamiliares);
+    return await this.antecedentesfamiliaresRepository.save(
+      antecedentesfamiliares,
+    );
   }
 
   async remove(id: number): Promise<Antecedentesfamiliares> {
-    const antecedentesfamiliares = await this.antecedentesfamiliaresRepository.findOne({ where: { idmedicina: id } });
+    const antecedentesfamiliares =
+      await this.antecedentesfamiliaresRepository.findOne({
+        where: { idmedicina: id },
+      });
 
     if (!antecedentesfamiliares) {
-      throw new NotFoundException(`AntecedentesFamiliares record with ID ${id} not found.`);
+      throw new NotFoundException(
+        `AntecedentesFamiliares record with ID ${id} not found.`,
+      );
     }
 
-    return await this.antecedentesfamiliaresRepository.remove(antecedentesfamiliares);
+    return await this.antecedentesfamiliaresRepository.remove(
+      antecedentesfamiliares,
+    );
   }
 }

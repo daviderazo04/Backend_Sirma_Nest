@@ -16,7 +16,6 @@ import { PersonaService } from './persona.service';
 import { CreatePersonaDto } from './dto/create-persona.dto';
 import { UpdatePersonaDto } from './dto/update-persona.dto';
 import { Persona } from './entities/persona.entity';
-
 @Controller('api/personas')
 export class PersonaController {
   constructor(private readonly personaService: PersonaService) {}
@@ -36,7 +35,10 @@ export class PersonaController {
   async findOne(@Param('id') id: string): Promise<Persona> {
     return await this.personaService.findOne(+id);
   }
-
+  @Get('cedula/:cedula')
+  async findByCedula(@Param('cedula') cedula: string): Promise<Persona> {
+    return await this.personaService.findByCedula(cedula);
+  }
   @Patch(':id')
   async update(
     @Param('id') id: string,

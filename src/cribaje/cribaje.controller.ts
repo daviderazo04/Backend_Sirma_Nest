@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CribajeService } from './cribaje.service';
 import { CreateCribajeDto } from './dto/create-cribaje.dto';
 import { UpdateCribajeDto } from './dto/update-cribaje.dto';

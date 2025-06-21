@@ -1,5 +1,11 @@
 // src/medicina/dto/create-full-medicina.dto.ts
-import { IsString, IsOptional, Length, IsNotEmpty, ValidateNested } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  Length,
+  IsNotEmpty,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 // Import all your nested DTOs (replace paths as necessary)

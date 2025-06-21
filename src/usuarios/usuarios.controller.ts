@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Usuarios } from './entities/usuario.entity';
@@ -15,7 +26,10 @@ export class UsuariosController {
 
   // Creación de usuario por admin o doctor
   @Post('crear')
-  async crearUsuario(@Body() dto: CreateUsuarioDto, @Req() req): Promise<Usuarios> {
+  async crearUsuario(
+    @Body() dto: CreateUsuarioDto,
+    @Req() req,
+  ): Promise<Usuarios> {
     // req.user debe contener el usuario autenticado (simulado aquí)
     const creador = req.user as Usuarios | null;
     return this.usuariosService.create(dto, creador);
@@ -35,14 +49,17 @@ export class UsuariosController {
   async update(
     @Param('id') id: string,
     @Body() updateDto: Partial<CreateUsuarioDto>,
-    @Req() req
+    @Req() req,
   ): Promise<Usuarios> {
     const modificador = req.user as Usuarios | null;
     return this.usuariosService.update(Number(id), updateDto, modificador);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string, @Req() req): Promise<{ message: string }> {
+  async remove(
+    @Param('id') id: string,
+    @Req() req,
+  ): Promise<{ message: string }> {
     const eliminador = req.user as Usuarios | null;
     await this.usuariosService.remove(Number(id), eliminador);
     return { message: 'Usuario marcado como inactivo correctamente' };

@@ -13,6 +13,6 @@ import { MedicinaModule } from '../medicina/medicina.module'; // Import Medicina
   ],
   controllers: [SindromesGeriatricosController], // Assuming you have this
   providers: [SindromesGeriatricosService],
-  exports: [SindromesGeriatricosService]
+  exports: [SindromesGeriatricosService],
 })
 export class SindromesGeriatricosModule {}

@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { DatosGeneralesService } from './datos-generales.service';
 import { CreateDatosGeneraleDto } from './dto/create-datos-generale.dto';
 import { UpdateDatosGeneraleDto } from './dto/update-datos-generale.dto';
@@ -23,7 +32,10 @@ export class DatosGeneralesController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateDatosGeneraleDto: UpdateDatosGeneraleDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateDatosGeneraleDto: UpdateDatosGeneraleDto,
+  ) {
     return await this.datosGeneralesService.update(+id, updateDatosGeneraleDto);
   }
 

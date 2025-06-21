@@ -16,7 +16,10 @@ export class SeguimientoFisioterapiaService {
     return `This action returns a #${id} seguimientoFisioterapia`;
   }
 
-  update(id: number, updateSeguimientoFisioterapiaDto: UpdateSeguimientoFisioterapiaDto) {
+  update(
+    id: number,
+    updateSeguimientoFisioterapiaDto: UpdateSeguimientoFisioterapiaDto,
+  ) {
     return `This action updates a #${id} seguimientoFisioterapia`;
   }
 
