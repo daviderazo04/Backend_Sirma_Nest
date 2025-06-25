@@ -1,50 +1,35 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+// src/equilibrio-estatico/equilibrio-estatico.controller.ts
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { EquilibrioEstaticoService } from './equilibrio-estatico.service';
 import { CreateEquilibrioEstaticoDto } from './dto/create-equilibrio-estatico.dto';
 import { UpdateEquilibrioEstaticoDto } from './dto/update-equilibrio-estatico.dto';
 
-@Controller('equilibrio-estatico')
+@Controller('/api/equilibrio-estatico') // Endpoint base para EquilibrioEstatico
 export class EquilibrioEstaticoController {
-  constructor(
-    private readonly equilibrioEstaticoService: EquilibrioEstaticoService,
-  ) {}
+  constructor(private readonly equilibrioEstaticoService: EquilibrioEstaticoService) {}
 
   @Post()
-  create(@Body() createEquilibrioEstaticoDto: CreateEquilibrioEstaticoDto) {
+  async create(@Body() createEquilibrioEstaticoDto: CreateEquilibrioEstaticoDto) {
     return this.equilibrioEstaticoService.create(createEquilibrioEstaticoDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.equilibrioEstaticoService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.equilibrioEstaticoService.findOne(+id);
+  @Get(':idfisioterapia') // El ID en la URL es idfisioterapia
+  async findOne(@Param('idfisioterapia') idfisioterapia: string) {
+    return this.equilibrioEstaticoService.findOne(+idfisioterapia);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEquilibrioEstaticoDto: UpdateEquilibrioEstaticoDto,
-  ) {
-    return this.equilibrioEstaticoService.update(
-      +id,
-      updateEquilibrioEstaticoDto,
-    );
+  @Patch(':idfisioterapia') // El ID en la URL es idfisioterapia
+  async update(@Param('idfisioterapia') idfisioterapia: string, @Body() updateEquilibrioEstaticoDto: UpdateEquilibrioEstaticoDto) {
+    return this.equilibrioEstaticoService.update(+idfisioterapia, updateEquilibrioEstaticoDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.equilibrioEstaticoService.remove(+id);
+  @Delete(':idfisioterapia') // El ID en la URL es idfisioterapia
+  async remove(@Param('idfisioterapia') idfisioterapia: string) {
+    return this.equilibrioEstaticoService.remove(+idfisioterapia);
   }
 }

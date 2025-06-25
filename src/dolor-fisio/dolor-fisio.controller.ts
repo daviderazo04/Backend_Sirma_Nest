@@ -1,45 +1,35 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+// src/dolor-fisio/dolor-fisio.controller.ts
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DolorFisioService } from './dolor-fisio.service';
 import { CreateDolorFisioDto } from './dto/create-dolor-fisio.dto';
 import { UpdateDolorFisioDto } from './dto/update-dolor-fisio.dto';
 
-@Controller('dolor-fisio')
+@Controller('/api/dolor-fisio') // Endpoint base para DolorFisio
 export class DolorFisioController {
   constructor(private readonly dolorFisioService: DolorFisioService) {}
 
   @Post()
-  create(@Body() createDolorFisioDto: CreateDolorFisioDto) {
+  async create(@Body() createDolorFisioDto: CreateDolorFisioDto) {
     return this.dolorFisioService.create(createDolorFisioDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.dolorFisioService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dolorFisioService.findOne(+id);
+  @Get(':id') // El ID en la URL es iddolorfisio
+  async findOne(@Param('id') id: string) {
+    return this.dolorFisioService.findOne(+id); // Convertir a número
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateDolorFisioDto: UpdateDolorFisioDto,
-  ) {
-    return this.dolorFisioService.update(+id, updateDolorFisioDto);
+  @Patch(':id') // El ID en la URL es iddolorfisio
+  async update(@Param('id') id: string, @Body() updateDolorFisioDto: UpdateDolorFisioDto) {
+    return this.dolorFisioService.update(+id, updateDolorFisioDto); // Convertir a número
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dolorFisioService.remove(+id);
+  @Delete(':id') // El ID en la URL es iddolorfisio
+  async remove(@Param('id') id: string) {
+    return this.dolorFisioService.remove(+id); // Convertir a número
   }
 }
