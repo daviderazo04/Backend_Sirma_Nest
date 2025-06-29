@@ -104,4 +104,34 @@ export class PacienteService {
 
     return result;
   }
+  async getPacienteByIdficha(cedula: string): Promise<string[]> {
+    interface FichaRow {
+      idficha?: string;
+      idFicha?: string;
+      [key: string]: unknown;
+    }
+
+    const result: unknown[] = await this.pacienteRepository.query(
+      'CALL obtener_ficha_por_cedula(?)',
+      [cedula],
+    );
+
+    // Dependiendo del driver y cómo retorna el procedimiento, puede ser result[0] o result
+    const rows: FichaRow[] = Array.isArray(result[0])
+      ? (result[0] as FichaRow[])
+      : (result as FichaRow[]);
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontró ficha para la cédula ${cedula}`,
+      );
+    }
+
+    // Asegúrate de que el campo sea el correcto según tu SP, por ejemplo: row.idficha o row.idFicha
+    const fichas: string[] = rows
+      .map((row) => row.idficha ?? row.idFicha)
+      .filter((id): id is string => typeof id === 'string');
+
+    return fichas;
+  }
 }
