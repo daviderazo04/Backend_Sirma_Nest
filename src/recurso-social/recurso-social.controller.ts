@@ -3,15 +3,16 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Patch,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { RecursoSocialService } from './recurso-social.service';
 import { CreateRecursoSocialDto } from './dto/create-recurso-social.dto';
 import { UpdateRecursoSocialDto } from './dto/update-recurso-social.dto';
 
-@Controller('recurso-social')
+@Controller('api/recurso-social')
 export class RecursoSocialController {
   constructor(private readonly recursoSocialService: RecursoSocialService) {}
 
@@ -26,20 +27,20 @@ export class RecursoSocialController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.recursoSocialService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.recursoSocialService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateRecursoSocialDto: UpdateRecursoSocialDto,
   ) {
-    return this.recursoSocialService.update(+id, updateRecursoSocialDto);
+    return this.recursoSocialService.update(id, updateRecursoSocialDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.recursoSocialService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.recursoSocialService.remove(id);
   }
 }

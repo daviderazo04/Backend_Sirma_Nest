@@ -11,7 +11,7 @@ import { TamizajeService } from './tamizaje.service';
 import { CreateTamizajeDto } from './dto/create-tamizaje.dto';
 import { UpdateTamizajeDto } from './dto/update-tamizaje.dto';
 
-@Controller('tamizaje')
+@Controller('api/tamizaje')
 export class TamizajeController {
   constructor(private readonly tamizajeService: TamizajeService) {}
 

@@ -3,15 +3,16 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Patch,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CognitivoService } from './cognitivo.service';
 import { CreateCognitivoDto } from './dto/create-cognitivo.dto';
 import { UpdateCognitivoDto } from './dto/update-cognitivo.dto';
 
-@Controller('cognitivo')
+@Controller('api/cognitivo')
 export class CognitivoController {
   constructor(private readonly cognitivoService: CognitivoService) {}
 
@@ -26,20 +27,20 @@ export class CognitivoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cognitivoService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.cognitivoService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateCognitivoDto: UpdateCognitivoDto,
   ) {
-    return this.cognitivoService.update(+id, updateCognitivoDto);
+    return this.cognitivoService.update(id, updateCognitivoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cognitivoService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.cognitivoService.remove(id);
   }
 }

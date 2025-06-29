@@ -6,12 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { DepresionService } from './depresion.service';
 import { CreateDepresionDto } from './dto/create-depresion.dto';
 import { UpdateDepresionDto } from './dto/update-depresion.dto';
 
-@Controller('depresion')
+@Controller('api/depresion')
 export class DepresionController {
   constructor(private readonly depresionService: DepresionService) {}
 
@@ -26,20 +27,20 @@ export class DepresionController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.depresionService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.depresionService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateDepresionDto: UpdateDepresionDto,
   ) {
-    return this.depresionService.update(+id, updateDepresionDto);
+    return this.depresionService.update(id, updateDepresionDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.depresionService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.depresionService.remove(id);
   }
 }

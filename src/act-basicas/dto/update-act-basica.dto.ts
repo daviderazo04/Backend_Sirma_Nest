@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateActBasicaDto } from './create-act-basica.dto';
+import { CreateActBasicasDto } from './create-act-basica.dto';
 
-export class UpdateActBasicaDto extends PartialType(CreateActBasicaDto) {}
+export class UpdateActBasicaDto extends PartialType(CreateActBasicasDto) {}

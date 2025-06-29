@@ -3,15 +3,16 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Patch,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { OtrosRiesgosService } from './otros-riesgos.service';
 import { CreateOtrosRiesgoDto } from './dto/create-otros-riesgo.dto';
 import { UpdateOtrosRiesgoDto } from './dto/update-otros-riesgo.dto';
 
-@Controller('otros-riesgos')
+@Controller('api/otros-riesgos')
 export class OtrosRiesgosController {
   constructor(private readonly otrosRiesgosService: OtrosRiesgosService) {}
 
@@ -26,20 +27,20 @@ export class OtrosRiesgosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.otrosRiesgosService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.otrosRiesgosService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateOtrosRiesgoDto: UpdateOtrosRiesgoDto,
   ) {
-    return this.otrosRiesgosService.update(+id, updateOtrosRiesgoDto);
+    return this.otrosRiesgosService.update(id, updateOtrosRiesgoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.otrosRiesgosService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.otrosRiesgosService.remove(id);
   }
 }

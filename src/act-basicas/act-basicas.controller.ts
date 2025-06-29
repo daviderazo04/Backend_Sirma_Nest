@@ -8,15 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ActBasicasService } from './act-basicas.service';
-import { CreateActBasicaDto } from './dto/create-act-basica.dto';
+import { CreateActBasicasDto } from './dto/create-act-basica.dto';
 import { UpdateActBasicaDto } from './dto/update-act-basica.dto';
 
-@Controller('act-basicas')
+@Controller('api/act-basicas')
 export class ActBasicasController {
   constructor(private readonly actBasicasService: ActBasicasService) {}
 
   @Post()
-  create(@Body() createActBasicaDto: CreateActBasicaDto) {
+  create(@Body() createActBasicaDto: CreateActBasicasDto) {
     return this.actBasicasService.create(createActBasicaDto);
   }
 

@@ -1,22 +1,14 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { EnfermeriaService } from './enfermeria.service';
 import { CreateEnfermeriaDto } from './dto/create-enfermeria.dto';
 import { UpdateEnfermeriaDto } from './dto/update-enfermeria.dto';
 
-@Controller('enfermeria')
+@Controller('/api/enfermeria') // Ruta base para los endpoints de enfermería
 export class EnfermeriaController {
   constructor(private readonly enfermeriaService: EnfermeriaService) {}
 
   @Post()
-  create(@Body() createEnfermeriaDto: CreateEnfermeriaDto) {
+  async create(@Body() createEnfermeriaDto: CreateEnfermeriaDto) {
     return this.enfermeriaService.create(createEnfermeriaDto);
   }
 
@@ -25,16 +17,13 @@ export class EnfermeriaController {
     return this.enfermeriaService.findAll();
   }
 
-  @Get(':id')
+  @Get(':id') // :id se refiere a idenfermeria
   findOne(@Param('id') id: string) {
-    return this.enfermeriaService.findOne(+id);
+    return this.enfermeriaService.findOne(+id); // Convertir a número
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEnfermeriaDto: UpdateEnfermeriaDto,
-  ) {
+  update(@Param('id') id: string, @Body() updateEnfermeriaDto: UpdateEnfermeriaDto) {
     return this.enfermeriaService.update(+id, updateEnfermeriaDto);
   }
 
