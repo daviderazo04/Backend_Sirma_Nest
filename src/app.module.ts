@@ -89,6 +89,7 @@ import { TonoMuscularModule } from './tono-muscular/tono-muscular.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ZonadolorModule } from './zonadolor/zonadolor.module';
 import { PersonaModule } from './persona/persona.module';
+import { FichasGeneralCompletaModule } from './fichas-general-completa/fichas-general-completa.module';
 
 @Module({
   imports: [
@@ -193,6 +194,7 @@ import { PersonaModule } from './persona/persona.module';
     TonoMuscularModule,
     UsuariosModule,
     ZonadolorModule,
+    FichasGeneralCompletaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
