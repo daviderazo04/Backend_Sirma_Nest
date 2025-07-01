@@ -104,10 +104,18 @@ export class PacienteService {
 
     return result;
   }
-  async getPacienteByIdficha(cedula: string): Promise<string[]> {
+  async getPacienteByIdficha(cedula: string): Promise<any[]> {
     interface FichaRow {
       idficha?: string;
       idFicha?: string;
+      PER_CEDULA?: string;
+      PER_PRIMERNOMBRE?: string;
+      PER_SEGUNDONOMBRE?: string;
+      PER_PRIMERAPELLIDO?: string;
+      PER_SEGUNDOAPELLIDO?: string;
+      PAC_FECHAPRIMERCONTACTO?: string;
+      PAC_ESTADOGENERAL?: string;
+      PAC_OBSERVACIONES?: string;
       [key: string]: unknown;
     }
 
@@ -127,11 +135,7 @@ export class PacienteService {
       );
     }
 
-    // Asegúrate de que el campo sea el correcto según tu SP, por ejemplo: row.idficha o row.idFicha
-    const fichas: string[] = rows
-      .map((row) => row.idficha ?? row.idFicha)
-      .filter((id): id is string => typeof id === 'string');
-
-    return fichas;
+    // Devuelve todos los datos de cada ficha, no solo el id
+    return rows;
   }
 }

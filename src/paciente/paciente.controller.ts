@@ -39,7 +39,7 @@ export class PacienteController {
   }
 
   @Get('ficha/cedula/:cedula')
-  async getFichaByCedula(@Param('cedula') cedula: string): Promise<string[]> {
+  async getFichaByCedula(@Param('cedula') cedula: string): Promise<any[]> {
     return await this.pacienteService.getPacienteByIdficha(cedula);
   }
   @Patch(':idficha')
