@@ -6,7 +6,7 @@ export class Zonadolor {
   @PrimaryGeneratedColumn({ type: 'int', name: 'IDZONA' })
   idzona: number;
 
-  @Column('char', { name: 'ZONA_NOMBRE', nullable: true, length: 10 })
+  @Column('char', { name: 'ZONA_NOMBRE', nullable: true, length: 80 })
   zonaNombre: string | null;
 
   @OneToMany(() => Dolorfisio, (dolorfisio) => dolorfisio.idzona2)

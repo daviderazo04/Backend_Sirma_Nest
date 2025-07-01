@@ -22,49 +22,39 @@ export class CreateFisioterapiaFullDto {
   @IsNotEmpty()
   @IsString()
   @Length(6, 6)
-  idFicha: string; // <-- CORRECCIÓN: 'idFicha'
+  idficha: string; // <-- CORRECCIÓN: 'idFicha'
 
   @IsOptional()
-  @IsBoolean()
-  fisioterapiaEstado?: boolean;
+  @IsString()
+  fisNombreencuestador?: string;
+
+  @IsOptional()
+  @IsString()
+  fisProblemasactual?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  fisMarcha: string;
+
+  @IsNotEmpty()
+  @IsString()
+  fisTraslado: string;
 
   @IsOptional()
   @IsNumber()
-  fisioterapiaNumSesion?: number;
-
-  @IsNotEmpty()
-  @IsDateString()
-  fisioterapiaFecha: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @Length(5, 5)
-  fisioterapiaHoraInicio: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @Length(5, 5)
-  fisioterapiaHoraFin: string;
+  fisPeso?: number;
 
   @IsOptional()
-  @IsString()
-  @Length(0, 1000)
-  fisioterapiaObservaciones?: string;
+  @IsNumber()
+  fisTalla?: number;
 
   @IsOptional()
-  @IsString()
-  @Length(0, 500)
-  fisioterapiaDiagnostico?: string;
+  @IsNumber()
+  fisDiscapacidad?: number;
 
   @IsOptional()
-  @IsString()
-  @Length(0, 500)
-  fisioterapiaObjetivos?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(0, 500)
-  fisioterapiaTratamiento?: string;
+  @IsNumber()
+  fisDolor?: number;
 
   // ... (DTOs anidados para relaciones OneToOne y OneToMany -- permanecen igual) ...
 }
