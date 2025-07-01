@@ -1,5 +1,5 @@
 // src/examen-regional/dto/create-examen-regional.dto.ts
-import { IsNumber, IsOptional, IsBoolean, IsNotEmpty } from 'class-validator';
+import { IsOptional, IsBoolean } from 'class-validator';
 
 export class CreateExamenRegionalNestedDto {
   @IsOptional()

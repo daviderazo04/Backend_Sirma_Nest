@@ -33,8 +33,15 @@ export class Enfermeria {
   })
   enfNombreencuestador: string | null;
 
+  @Column('varchar', {
+    name: 'ENF_OBSERVACIONES',
+    nullable: true,
+    length: 1000,
+  })
+  enfObservaciones: string | null;
+
   @OneToOne(() => Actbasicas, (actbasicas) => actbasicas.idenfermeria2)
-  actbasicas: Actbasicas;
+  actbasica: Actbasicas;
 
   @OneToOne(
     () => Actinstrumental,

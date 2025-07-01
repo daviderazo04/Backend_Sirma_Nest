@@ -56,7 +56,7 @@ export class Actbasicas {
   abTotal: number | null;
 
   // ¡IMPORTANTE! Asegúrate de que Enfermeria esté correctamente importado arriba.
-  @OneToOne(() => Enfermeria, (enfermeria) => enfermeria.actbasicas, {
+  @OneToOne(() => Enfermeria, (enfermeria) => enfermeria.actbasica, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
