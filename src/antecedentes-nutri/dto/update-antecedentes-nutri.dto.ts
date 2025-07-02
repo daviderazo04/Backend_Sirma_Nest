@@ -1,6 +1,9 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateAntecedentesNutriDto } from './create-antecedentes-nutri.dto';
+// src/antecedentes-nutri/dto/update-antecedentes-nutri.dto.ts
 
-export class UpdateAntecedentesNutriDto extends PartialType(
-  CreateAntecedentesNutriDto,
-) {}
+import { PartialType } from '@nestjs/mapped-types';
+// CORRECCIÓN: Cambiado 'CreateAntecedentesNutriDto' a 'CreateAntecedentesnutriDto'
+import { CreateAntecedentesnutriDto } from './create-antecedentes-nutri.dto';
+
+export class UpdateAntecedentesnutriDto extends PartialType(CreateAntecedentesnutriDto) {
+  // Todas las propiedades de CreateAntecedentesnutriDto son opcionales aquí.
+}

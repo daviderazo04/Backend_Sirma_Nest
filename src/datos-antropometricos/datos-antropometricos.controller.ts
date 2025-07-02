@@ -1,52 +1,70 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { DatosAntropometricosService } from './datos-antropometricos.service';
-import { CreateDatosAntropometricoDto } from './dto/create-datos-antropometrico.dto';
-import { UpdateDatosAntropometricoDto } from './dto/update-datos-antropometrico.dto';
+// src/datosantropometricos/datosantropometricos.controller.ts
 
-@Controller('datos-antropometricos')
-export class DatosAntropometricosController {
-  constructor(
-    private readonly datosAntropometricosService: DatosAntropometricosService,
-  ) {}
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, ParseIntPipe } from '@nestjs/common';
+import { DatosantropometricosService } from './datos-antropometricos.service';
+import { CreateDatosantropometricosDto } from './dto/create-datos-antropometrico.dto';
+import { Datosantropometricos } from './entities/datos-antropometrico.entity';
 
+
+@Controller('datosantropometricos')
+export class DatosantropometricosController {
+  constructor(private readonly datosantropometricosService: DatosantropometricosService) {}
+
+  /**
+   * Crea nuevos datos antropométricos.
+   * @param createDatosantropometricosDto Datos para la creación.
+   * @returns Los datos antropométricos creados.
+   */
   @Post()
-  create(@Body() createDatosAntropometricoDto: CreateDatosAntropometricoDto) {
-    return this.datosAntropometricosService.create(
-      createDatosAntropometricoDto,
-    );
+  @HttpCode(HttpStatus.CREATED)
+  async create(@Body() createDatosantropometricosDto: CreateDatosantropometricosDto): Promise<Datosantropometricos> {
+    return this.datosantropometricosService.create(createDatosantropometricosDto);
   }
 
+  /**
+   * Obtiene todos los datos antropométricos.
+   * @returns Un array de datos antropométricos.
+   */
   @Get()
-  findAll() {
-    return this.datosAntropometricosService.findAll();
+  @HttpCode(HttpStatus.OK)
+  async findAll(): Promise<Datosantropometricos[]> {
+    return this.datosantropometricosService.findAll();
   }
 
+  /**
+   * Obtiene datos antropométricos por su ID de Nutrición.
+   * @param id El ID de Nutrición de los datos.
+   * @returns Los datos antropométricos encontrados.
+   */
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.datosAntropometricosService.findOne(+id);
+  @HttpCode(HttpStatus.OK)
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Datosantropometricos> {
+    return this.datosantropometricosService.findOne(id);
   }
 
+  /**
+   * Actualiza datos antropométricos existentes por su ID de Nutrición.
+   * @param id El ID de Nutrición de los datos a actualizar.
+   * @param updateDatosantropometricosDto Datos para la actualización.
+   * @returns Los datos antropométricos actualizados.
+   */
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateDatosAntropometricoDto: UpdateDatosAntropometricoDto,
-  ) {
-    return this.datosAntropometricosService.update(
-      +id,
-      updateDatosAntropometricoDto,
-    );
+  @HttpCode(HttpStatus.OK)
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateDatosantropometricosDto: CreateDatosantropometricosDto,
+  ): Promise<Datosantropometricos> {
+    return this.datosantropometricosService.update(id, updateDatosantropometricosDto);
   }
 
+  /**
+   * Elimina datos antropométricos por su ID de Nutrición.
+   * @param id El ID de Nutrición de los datos a eliminar.
+   * @returns Un objeto con el resultado de la eliminación.
+   */
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.datosAntropometricosService.remove(+id);
+  @HttpCode(HttpStatus.NO_CONTENT) // 204 No Content para eliminaciones exitosas
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    await this.datosantropometricosService.remove(id);
   }
 }

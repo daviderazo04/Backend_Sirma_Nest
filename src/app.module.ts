@@ -54,10 +54,8 @@ import { ActInstrumentalModule } from './act-instrumental/act-instrumental.modul
 import { AlertaModule } from './alerta/alerta.module';
 import { AndrologicoModule } from './andrologico/andrologico.module';
 import { AntecedentesFamiliaresModule } from './antecedentes-familiares/antecedentes-familiares.module';
-import { AntecedentesNutriModule } from './antecedentes-nutri/antecedentes-nutri.module';
 import { CognitivoModule } from './cognitivo/cognitivo.module';
 import { CribajeModule } from './cribaje/cribaje.module';
-import { DatosAntropometricosModule } from './datos-antropometricos/datos-antropometricos.module';
 import { DatosGeneralesModule } from './datos-generales/datos-generales.module';
 import { DepresionModule } from './depresion/depresion.module';
 import { DiagnosticoModule } from './diagnostico/diagnostico.module';
@@ -90,6 +88,8 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { ZonadolorModule } from './zonadolor/zonadolor.module';
 import { PersonaModule } from './persona/persona.module';
 import { FichasGeneralCompletaModule } from './fichas-general-completa/fichas-general-completa.module';
+import { AntecedentesnutriModule } from './antecedentes-nutri/antecedentes-nutri.module';
+import { DatosantropometricosModule } from './datos-antropometricos/datos-antropometricos.module';
 
 @Module({
   imports: [
@@ -160,10 +160,10 @@ import { FichasGeneralCompletaModule } from './fichas-general-completa/fichas-ge
     AlertaModule,
     AndrologicoModule,
     AntecedentesFamiliaresModule,
-    AntecedentesNutriModule,
+    AntecedentesnutriModule,
     CognitivoModule,
     CribajeModule,
-    DatosAntropometricosModule,
+    DatosantropometricosModule,
     DatosGeneralesModule,
     DepresionModule,
     DiagnosticoModule,

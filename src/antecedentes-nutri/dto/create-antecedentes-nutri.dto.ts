@@ -1,72 +1,72 @@
-import { IsNumber, IsOptional, IsBoolean, IsString, IsNotEmpty } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+// src/antecedentesnutri/dto/create-antecedentesnutri.dto.ts
 
-export class CreateAntecedentesNutriDto {
-@ApiProperty({
-    description: 'ID de la nutrición a la que se asocian estos antecedentes. Es la clave primaria y foránea.',
-    example: 1,
-  })
-  @IsNumber()
-  @IsNotEmpty()
+import { IsBoolean, IsOptional, IsString, IsInt, IsNotEmpty, MaxLength } from 'class-validator';
+import { Type } from 'class-transformer';
+
+export class CreateAntecedentesnutriDto {
+  // idnutricion es la clave primaria y foránea, debe existir en Nutricion
+  @IsNotEmpty({ message: 'El ID de Nutrición es obligatorio.' })
+  @IsInt({ message: 'El ID de Nutrición debe ser un número entero.' })
+  @Type(() => Number) // Asegura que el valor se transforme a número
   idnutricion: number;
 
-  @ApiProperty({ description: 'Indica si la dieta es balanceada.', example: true, required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'AN_DIETABALANCEADA debe ser un valor booleano (true/false).' })
+  @Type(() => Boolean) // Transforma 0/1 a boolean
   anDietabalanceada?: boolean;
 
-  @ApiProperty({ description: 'Indica si tiene dentales completas.', example: false, required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'AN_DENTALESCOMPLETAS debe ser un valor booleano (true/false).' })
+  @Type(() => Boolean)
   anDentalescompletas?: boolean;
 
-  @ApiProperty({ description: 'Indica si tiene dificultad para masticar.', example: true, required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'AN_DIFICULTADMASTICAR debe ser un valor booleano (true/false).' })
+  @Type(() => Boolean)
   anDificultadmasticar?: boolean;
 
-  @ApiProperty({ description: 'Indica si tiene estreñimiento frecuente.', example: false, required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'AN_ESTRENIMIENTOFRECU debe ser un valor booleano (true/false).' })
+  @Type(() => Boolean)
   anEstrenimientofrecu?: boolean;
 
-  @ApiProperty({ description: 'Indica si tiene diarrea frecuente.', example: true, required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'AN_DIARREAFRECU debe ser un valor booleano (true/false).' })
+  @Type(() => Boolean)
   anDiarreafrecu?: boolean;
 
-  @ApiProperty({ description: 'Indica si tiene alergia alimentaria.', example: false, required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'AN_ALERGIAALIMENTARIA debe ser un valor booleano (true/false).' })
+  @Type(() => Boolean)
   anAlergiaalimentaria?: boolean;
 
-  @ApiProperty({ description: 'Descripción del desayuno.', example: 'Pan y café', maxLength: 80, required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'AN_DESAYUNO debe ser una cadena de texto.' })
+  @MaxLength(80, { message: 'AN_DESAYUNO no debe exceder los 80 caracteres.' })
   anDesayuno?: string;
 
-  @ApiProperty({ description: 'Descripción del almuerzo.', example: 'Arroz con pollo', maxLength: 80, required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'AN_ALMUERZO debe ser una cadena de texto.' })
+  @MaxLength(80, { message: 'AN_ALMUERZO no debe exceder los 80 caracteres.' })
   anAlmuerzo?: string;
 
-  @ApiProperty({ description: 'Descripción de la cena.', example: 'Sopa de verduras', maxLength: 80, required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'AN_CENA debe ser una cadena de texto.' })
+  @MaxLength(80, { message: 'AN_CENA no debe exceder los 80 caracteres.' })
   anCena?: string;
 
-  @ApiProperty({ description: 'Descripción de los snacks.', example: 'Frutas y yogur', maxLength: 80, required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'AN_SNACKS debe ser una cadena de texto.' })
+  @MaxLength(80, { message: 'AN_SNACKS no debe exceder los 80 caracteres.' })
   anSnacks?: string;
 
-  @ApiProperty({ description: 'Preferencias alimentarias.', example: 'Vegetariano', maxLength: 80, required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'AN_PREFERENCIAS debe ser una cadena de texto.' })
+  @MaxLength(80, { message: 'AN_PREFERENCIAS no debe exceder los 80 caracteres.' })
   anPreferencias?: string;
 
-  @ApiProperty({ description: 'Quién cocina habitualmente.', example: 'Familia', maxLength: 80, required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'AN_QUIENCOCINA debe ser una cadena de texto.' })
+  @MaxLength(80, { message: 'AN_QUIENCOCINA no debe exceder los 80 caracteres.' })
   anQuiencocina?: string;
 }
