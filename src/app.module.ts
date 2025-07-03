@@ -90,6 +90,7 @@ import { PersonaModule } from './persona/persona.module';
 import { FichasGeneralCompletaModule } from './fichas-general-completa/fichas-general-completa.module';
 import { AntecedentesnutriModule } from './antecedentes-nutri/antecedentes-nutri.module';
 import { DatosantropometricosModule } from './datos-antropometricos/datos-antropometricos.module';
+import { NutricioncompletoModule } from './nutricioncompleto/nutricioncompleto.module';
 
 @Module({
   imports: [
@@ -195,6 +196,7 @@ import { DatosantropometricosModule } from './datos-antropometricos/datos-antrop
     UsuariosModule,
     ZonadolorModule,
     FichasGeneralCompletaModule,
+    NutricioncompletoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
