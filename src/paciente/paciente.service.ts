@@ -6,6 +6,7 @@ import { CreatePacienteDto } from './dto/create-paciente.dto';
 import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { InsertarFichaGeneralDTO } from './dto/insertar-ficha-general.dto';
 import { FichaGeneralDto } from './dto/ficha-general.dto';
+import { FichaGeneralPorCedulaDto } from './dto/ficha-general-por-cedula.dto';
 
 @Injectable()
 export class PacienteService {
@@ -152,6 +153,25 @@ export class PacienteService {
     if (!rows || rows.length === 0) {
       throw new NotFoundException(
         `No se encontraron fichas generales.`,
+      );
+    }
+
+    return rows;
+  }
+
+  async obtenerFichasPorCedula(cedula: string): Promise<FichaGeneralPorCedulaDto[]> {
+    const result: unknown[] = await this.pacienteRepository.query(
+      'CALL SP_OBTENERFICHASPORCEDULA(?)',
+      [cedula],
+    );
+
+    const rows = Array.isArray(result[0])
+      ? (result[0] as FichaGeneralPorCedulaDto[])
+      : (result as FichaGeneralPorCedulaDto[]);
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontraron fichas para la cédula ${cedula}.`,
       );
     }
 

@@ -16,6 +16,7 @@ import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { Paciente } from './entities/paciente.entity';
 import { InsertarFichaGeneralDTO } from './dto/insertar-ficha-general.dto';
 import { FichaGeneralDto } from './dto/ficha-general.dto';
+import { FichaGeneralPorCedulaDto } from './dto/ficha-general-por-cedula.dto';
 
 @Controller('api/pacientes')
 export class PacienteController {
@@ -43,6 +44,14 @@ export class PacienteController {
   async findOne(@Param('idficha') idficha: string): Promise<Paciente> {
     return await this.pacienteService.findOne(idficha);
   }
+
+  @Get('fichas-generales/cedula/:cedula')
+  async getFichasGeneralesPorCedula(
+    @Param('cedula') cedula: string,
+  ): Promise<FichaGeneralPorCedulaDto[]> {
+    return await this.pacienteService.obtenerFichasPorCedula(cedula);
+  }
+
 
   @Get('ficha/cedula/:cedula')
   async getFichaByCedula(@Param('cedula') cedula: string): Promise<any[]> {
