@@ -15,6 +15,7 @@ import { CreatePacienteDto } from './dto/create-paciente.dto';
 import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { Paciente } from './entities/paciente.entity';
 import { InsertarFichaGeneralDTO } from './dto/insertar-ficha-general.dto';
+import { FichaGeneralDto } from './dto/ficha-general.dto';
 
 @Controller('api/pacientes')
 export class PacienteController {
@@ -31,6 +32,11 @@ export class PacienteController {
   @Get()
   async findAll(): Promise<Paciente[]> {
     return await this.pacienteService.findAll();
+  }
+  
+  @Get('fichas-generales')
+  async getFichasGenerales(): Promise<FichaGeneralDto[]> {
+    return await this.pacienteService.obtenerFichasGenerales();
   }
 
   @Get(':idficha')
@@ -62,4 +68,5 @@ export class PacienteController {
   ): Promise<any> {
     return await this.pacienteService.insertarFichaGeneral(datos);
   }
+
 }

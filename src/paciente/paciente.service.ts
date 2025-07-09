@@ -5,6 +5,7 @@ import { Paciente } from './entities/paciente.entity';
 import { CreatePacienteDto } from './dto/create-paciente.dto';
 import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { InsertarFichaGeneralDTO } from './dto/insertar-ficha-general.dto';
+import { FichaGeneralDto } from './dto/ficha-general.dto';
 
 @Injectable()
 export class PacienteService {
@@ -136,6 +137,24 @@ export class PacienteService {
     }
 
     // Devuelve todos los datos de cada ficha, no solo el id
+    return rows;
+  }
+
+  async obtenerFichasGenerales(): Promise<FichaGeneralDto[]> {
+    const result = await this.pacienteRepository.query(
+      'CALL sp_ObtenerFichasPacientes()',
+    );
+
+    const rows = Array.isArray(result[0])
+      ? (result[0] as FichaGeneralDto[])
+      : (result as FichaGeneralDto[]);
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontraron fichas generales.`,
+      );
+    }
+
     return rows;
   }
 }
