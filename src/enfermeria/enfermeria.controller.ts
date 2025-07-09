@@ -41,6 +41,12 @@ export class EnfermeriaController {
   async findOne(@Param('id') id: string) {
     return this.enfermeriaService.findOneFull(+id);
   }
+  @Get('completa/:idEnfermeria')
+  async getEnfermeriaCompleta(
+    @Param('idEnfermeria') idEnfermeria: string,
+  ): Promise<any> {
+    return await this.enfermeriaService.obtenerEnfermeriaCompleta(+idEnfermeria);
+  }
 
   // Endpoint para actualizar registro simple
   @Put(':id')

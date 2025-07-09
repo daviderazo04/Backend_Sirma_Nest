@@ -79,4 +79,22 @@ export class FisioterapiaService {
 
     return await this.fisioterapiaRepository.remove(fisioterapia);
   }
+
+  async obtenerFisioterapiaCompleta(idFisioterapia: number): Promise<any> {
+    const result: unknown[] = await this.fisioterapiaRepository.query(
+      'CALL sp_ObtenerFisioterapiaCompleta(?)',
+      [idFisioterapia],
+    );
+
+    const rows = Array.isArray(result[0]) ? result[0] : result;
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontró fisioterapia con ID ${idFisioterapia}.`,
+      );
+    }
+
+    return rows[0]; // Devuelves un solo registro
+  }
+
 }

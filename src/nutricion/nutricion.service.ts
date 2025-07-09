@@ -72,4 +72,21 @@ export class NutricionService {
       throw new NotFoundException(`Registro de Nutrición con ID ${id} no encontrado.`);
     }
   }
+
+  async obtenerNutricionCompleta(idNutricion: number): Promise<any> {
+    const result: unknown[] = await this.nutricionRepository.query(
+      'CALL sp_ObtenerNutricionCompleta(?)',
+      [idNutricion],
+    );
+
+    const rows = Array.isArray(result[0]) ? result[0] : result;
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontró nutrición con ID ${idNutricion}.`,
+      );
+    }
+
+    return rows[0]; // Devuelves una sola fila
+  }
 }

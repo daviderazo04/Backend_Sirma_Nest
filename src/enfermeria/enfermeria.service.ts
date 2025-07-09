@@ -604,4 +604,21 @@ export class EnfermeriaService {
 
     return this.findOneFull(idenfermeria);
   }
+
+  async obtenerEnfermeriaCompleta(idEnfermeria: number): Promise<any> {
+    const result: unknown[] = await this.enfermeriaRepository.query(
+      'CALL sp_obtenerEnfermeriaCompleta(?)',
+      [idEnfermeria],
+    );
+
+    const rows = Array.isArray(result[0]) ? result[0] : result;
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontró enfermería con ID ${idEnfermeria}.`,
+      );
+    }
+
+    return rows[0];
+  }
 }

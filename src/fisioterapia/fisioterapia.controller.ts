@@ -23,6 +23,14 @@ export class FisioterapiaController {
     return this.fisioterapiaService.findOne(+id); // Convert ID to number
   }
 
+  @Get('completo/:idFisioterapia')
+  async getFisioterapiaCompleta(
+    @Param('idFisioterapia') idFisioterapia: string,
+  ): Promise<any> {
+    return await this.fisioterapiaService.obtenerFisioterapiaCompleta(+idFisioterapia);
+  }
+
+
   @Patch(':id') // Use PATCH for partial updates
   update(@Param('id') id: string, @Body() updateFisioterapiaDto: UpdateFisioterapiaDto) {
     return this.fisioterapiaService.update(+id, updateFisioterapiaDto); // Convert ID to number

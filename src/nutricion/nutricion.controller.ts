@@ -71,6 +71,13 @@ export class NutricionController {
     return this.nutricionService.findOne(+id);
   }
 
+  @Get('completa/:idNutricion')
+  async getNutricionCompleta(
+    @Param('idNutricion') idNutricion: string,
+  ): Promise<any> {
+    return await this.nutricionService.obtenerNutricionCompleta(+idNutricion);
+  }
+
   @Patch(':id') // Se usa Patch para actualizaciones parciales
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Actualizar un registro de nutrición existente' })
