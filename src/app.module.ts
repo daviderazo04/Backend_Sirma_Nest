@@ -46,6 +46,7 @@ import { Patologico } from './patologico/entities/patologico.entity';
 import { Tonomuscular } from './tono-muscular/entities/tono-muscular.entity';
 import { Usuarios } from './usuarios/entities/usuario.entity';
 import { Zonadolor } from './zonadolor/entities/zonadolor.entity';
+import { SatisfaccionInteligenciaArtificial } from './satisfaccion-inteligencia-artificial/entities/satisfaccion-inteligencia-artificial.entity';
 
 // Módulos
 import { PacienteModule } from './paciente/paciente.module';
@@ -91,6 +92,7 @@ import { FichasGeneralCompletaModule } from './fichas-general-completa/fichas-ge
 import { AntecedentesnutriModule } from './antecedentes-nutri/antecedentes-nutri.module';
 import { DatosantropometricosModule } from './datos-antropometricos/datos-antropometricos.module';
 import { NutricioncompletoModule } from './nutricioncompleto/nutricioncompleto.module';
+import { SatisfaccionInteligenciaArtificialModule } from './satisfaccion-inteligencia-artificial/satisfaccion-inteligencia-artificial.module';
 
 @Module({
   imports: [
@@ -149,6 +151,7 @@ import { NutricioncompletoModule } from './nutricioncompleto/nutricioncompleto.m
           Tonomuscular,
           Usuarios,
           Zonadolor,
+          SatisfaccionInteligenciaArtificial,
         ],
         synchronize: true, // Solo para desarrollo
         logging: false,
@@ -197,6 +200,7 @@ import { NutricioncompletoModule } from './nutricioncompleto/nutricioncompleto.m
     ZonadolorModule,
     FichasGeneralCompletaModule,
     NutricioncompletoModule,
+    SatisfaccionInteligenciaArtificialModule,
   ],
   controllers: [AppController],
   providers: [AppService],
