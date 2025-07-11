@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Persona } from './entities/persona.entity';
 import { CreatePersonaDto } from './dto/create-persona.dto';
 import { UpdatePersonaDto } from './dto/update-persona.dto';
+import { GrupoEdadDto } from './dto/grupo-edad.dto';
 
 @Injectable()
 export class PersonaService {
@@ -57,5 +58,73 @@ export class PersonaService {
       );
     }
     return persona;
+  }
+
+  async obtenerGruposEdad(): Promise<GrupoEdadDto[]> {
+    const result: unknown[] = await this.personaRepository.query(
+      'CALL sp_ObtenerGruposEdad()',
+    );
+
+    // MySQL devuelve arrays anidados: [ [rows], ... ]
+    const rows = Array.isArray(result[0])
+      ? (result[0] as GrupoEdadDto[])
+      : (result as GrupoEdadDto[]);
+
+    if (!rows || rows.length === 0) {
+      throw new NotFoundException(
+        `No se encontraron datos de grupos de edad.`,
+      );
+    }
+
+    return rows;
+  }
+
+  async personasPorSexo(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorSexo()',
+    );
+    return result[0];
+  }
+
+  async personasPorEstadoCivil(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorEstadoCivil()',
+    );
+    return result[0];
+  }
+
+  async personasPorZona(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorZona()',
+    );
+    return result[0];
+  }
+
+  async personasPorOcupacion(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorOcupacion()',
+    );
+    return result[0];
+  }
+
+  async personasPorInstruccion(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorInstruccion()',
+    );
+    return result[0];
+  }
+
+  async personasPorComunidad(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorComunidad()',
+    );
+    return result[0];
+  }
+
+  async personasPorCuidador(): Promise<any[]> {
+    const result = await this.personaRepository.query(
+      'CALL sp_PersonasPorCuidador()',
+    );
+    return result[0];
   }
 }

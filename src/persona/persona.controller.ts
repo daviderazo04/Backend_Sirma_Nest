@@ -18,6 +18,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { PersonaFicha } from 'src/persona-ficha/entities/persona-ficha.entity';
 import { Datosgenerales } from 'src/datos-generales/entities/datos-generale.entity';
+import { GrupoEdadDto } from './dto/grupo-edad.dto';
 @Controller('api/personas')
 export class PersonaController {
   constructor(
@@ -93,5 +94,45 @@ export class PersonaController {
 
     // Retornar las fichas médicas (puedes personalizar la respuesta)
     return personaFichas.map((pf) => pf.idficha2);
+  }
+
+  @Get('reporte/grupos-edad')
+  async obtenerGruposEdad(): Promise<GrupoEdadDto[]> {
+    return await this.personaService.obtenerGruposEdad();
+  }
+
+  @Get('reporte/sexo')
+  async personasPorSexo() {
+    return await this.personaService.personasPorSexo();
+  }
+
+  @Get('reporte/estado-civil')
+  async personasPorEstadoCivil() {
+    return await this.personaService.personasPorEstadoCivil();
+  }
+
+  @Get('reporte/zona')
+  async personasPorZona() {
+    return await this.personaService.personasPorZona();
+  }
+
+  @Get('reporte/ocupacion')
+  async personasPorOcupacion() {
+    return await this.personaService.personasPorOcupacion();
+  }
+
+  @Get('reporte/instruccion')
+  async personasPorInstruccion() {
+    return await this.personaService.personasPorInstruccion();
+  }
+
+  @Get('reporte/comunidad')
+  async personasPorComunidad() {
+    return await this.personaService.personasPorComunidad();
+  }
+
+  @Get('reporte/cuidador')
+  async personasPorCuidador() {
+    return await this.personaService.personasPorCuidador();
   }
 }
