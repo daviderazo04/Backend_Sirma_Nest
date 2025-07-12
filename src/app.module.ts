@@ -93,6 +93,7 @@ import { AntecedentesnutriModule } from './antecedentes-nutri/antecedentes-nutri
 import { DatosantropometricosModule } from './datos-antropometricos/datos-antropometricos.module';
 import { NutricioncompletoModule } from './nutricioncompleto/nutricioncompleto.module';
 import { SatisfaccionInteligenciaArtificialModule } from './satisfaccion-inteligencia-artificial/satisfaccion-inteligencia-artificial.module';
+import { ResumenNutricionalModule } from './resumen-nutricional/resumen-nutricional.module';
 
 @Module({
   imports: [
@@ -201,6 +202,7 @@ import { SatisfaccionInteligenciaArtificialModule } from './satisfaccion-intelig
     FichasGeneralCompletaModule,
     NutricioncompletoModule,
     SatisfaccionInteligenciaArtificialModule,
+    ResumenNutricionalModule,
   ],
   controllers: [AppController],
   providers: [AppService],
