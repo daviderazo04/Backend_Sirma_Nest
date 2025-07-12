@@ -3,7 +3,6 @@ import {
   IsOptional,
   Length,
   ValidateNested,
-  IsInt,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -17,10 +16,11 @@ import { CreateRecursoSocialNestedDto } from '../../recurso-social/dto/create-re
 import { CreateTamizajeNestedDto } from '../../tamizaje/dto/create-tamizaje-nested.dto';
 
 export class UpdateFullEnfermeriaDto {
-  // Campos principales de la entidad Enfermeria (todos opcionales para update)
+  // Debe ser IsString, NO IsInt
   @IsOptional()
-  @IsInt()
-  idficha?: number;
+  @IsString()
+  @Length(1, 6)
+  idficha?: string;
 
   @IsOptional()
   @IsString()
