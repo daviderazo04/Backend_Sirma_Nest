@@ -128,4 +128,11 @@ export class CreateNutricionCompletoDto {
 
   @IsNumber()
   brazo: number;
+
+  // Nuevos campos
+  @IsNumber()
+  talla: number;
+
+  @IsNumber()
+  peso: number;
 }
