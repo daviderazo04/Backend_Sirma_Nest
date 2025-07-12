@@ -21,6 +21,12 @@ export class Datosantropometricos {
   @Column('smallint', { name: 'DA_BRAZO', nullable: true })
   daBrazo: number | null;
 
+  @Column('decimal', { name: 'DA_TALLA', nullable: true, precision: 3, scale: 2 })
+  daTalla: string | null;
+
+  @Column('decimal', { name: 'DA_PESO', nullable: true, precision: 5, scale: 2 })
+  daPeso: string | null;
+
   @OneToOne(() => Nutricion, (nutricion) => nutricion.datosantropometricos, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
