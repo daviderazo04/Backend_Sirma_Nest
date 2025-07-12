@@ -15,16 +15,16 @@ export class CreateDiagnosticoNestedDto {
 
   @IsOptional()
   @IsString()
-  @Length(1, 10)
+  @Length(1, 50)
   diagPresundefini?: string;
 
   @IsOptional()
   @IsString()
-  @Length(1, 10)
+  @Length(1, 80)
   diagCie?: string;
 
   @IsOptional()
   @IsString()
-  @Length(1, 10)
+  @Length(1, 80)
   diagClinicocindromico?: string;
 }
