@@ -62,4 +62,69 @@ export class NutricioncompletoService {
       throw error; // Re-lanza el error para que sea manejado por el controlador
     }
   }
+  /**
+   * Retrieves complete nutrition data by nutrition header ID (IDNUTRICION).
+   * @param idNutricion The ID of the nutrition header to retrieve.
+   * @returns The nutrition data in JSON format.
+   * @throws NotFoundException if no data is found for the given nutrition ID.
+   */
+  async obtenerPorIdNutricion(idNutricion: number): Promise<any> {
+    const query = `CALL getNutricionCompletoJsonByIdNutricion(?)`;
+    const params = [idNutricion];
+
+    try {
+      const result = await this.connection.query(query, params);
+
+      if (result && result.length > 0 && result[0].length > 0 && result[0][0].nutricionData) {
+        return result[0][0].nutricionData;
+      } else {
+        throw new NotFoundException(`Ficha de nutrición con ID de cabecera ${idNutricion} no encontrada o datos incompletos.`);
+      }
+    } catch (error) {
+      console.error('Error al obtener datos de nutrición por ID de Nutrición:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Updates a complete nutrition record by its header ID (IDNUTRICION).
+   * @param idNutricion The ID of the nutrition header to update.
+   * @param dto The data transfer object containing all updated nutrition details.
+   * @returns A success message.
+   */
+  async actualizar(idNutricion: number, dto: CreateNutricionCompletoDto): Promise<any> {
+    const query = `
+      CALL updateNutricionCompleto(?, ?, ?, ?, ?,
+                                   ?, ?, ?, ?, ?, ?, ?,
+                                   ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                                   ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                                   ?, ?, ?, ?, ?, ?, ?) -- Corregido: 7 marcadores de posición aquí
+    `;
+
+    const params = [
+      idNutricion,
+      dto.idFicha, dto.nombreEncuestador, dto.evalGlobal, dto.estadoNutricional,
+      dto.perdidaApetito, dto.perdidaPeso, dto.movilidad, dto.enfermedadAguda, dto.neuropsico, dto.imc,
+      dto.totales,
+      dto.viveDomicilio, dto.masTresMedicinas, dto.ulceraLesionCutanea, dto.comidaCompleta, dto.consumePaciente, dto.frutaVerdura, dto.vasosAgua,
+      dto.formaAlimento, dto.bienNutrido, dto.estadoSalud, dto.circunBraquial, dto.circunPantorrilla, dto.evaTotal,
+      dto.dietaBalanceada ? 1 : 0,
+      dto.dentalesCompletas ? 1 : 0,
+      dto.dificultadMasticar ? 1 : 0,
+      dto.estrenimientoFrecu ? 1 : 0,
+      dto.diarreaFrecu ? 1 : 0,
+      dto.alergiaAlimentaria ? 1 : 0,
+      dto.desayuno, dto.almuerzo, dto.cena, dto.snacks, dto.preferencias, dto.quienCocina,
+      dto.imcDA, dto.cintura, dto.cadera, dto.pantorrilla, dto.brazo,
+      dto.talla, dto.peso
+    ];
+
+    try {
+        await this.connection.query(query, params);
+        return { mensaje: `Evaluación nutricional con ID ${idNutricion} actualizada exitosamente` };
+    } catch (error) {
+        console.error('Error al actualizar datos de nutrición:', error);
+        throw error;
+    }
+  }
 }
