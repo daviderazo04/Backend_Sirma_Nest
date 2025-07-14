@@ -453,6 +453,235 @@ export class MedicinaService {
         error,
       );
     }
+    try {
+      if (andrologico) {
+        if (existingMedicina.andrologico) {
+          await this.andrologicoService.update(medicinaId, andrologico);
+        } else {
+          await this.andrologicoService.create({
+            idmedicina: medicinaId,
+            ...andrologico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create andrologico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+    try {
+      if (antecedentesfamiliares) {
+        if (existingMedicina.antecedentesfamiliares) {
+          await this.antecedentesfamiliaresService.update(medicinaId, antecedentesfamiliares);
+        } else {
+          await this.antecedentesfamiliaresService.create({
+            idmedicina: medicinaId,
+            ...antecedentesfamiliares,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create antecedentesfamiliares for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+    try {
+      if (diagnostico) {
+        if (existingMedicina.diagnostico) {
+          await this.diagnosticoService.update(medicinaId, diagnostico);
+        } else {
+          await this.diagnosticoService.create({
+            idmedicina: medicinaId,
+            ...diagnostico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create diagnostico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+    try {
+      if (diagnostico) {
+        if (existingMedicina.diagnostico) {
+          await this.diagnosticoService.update(medicinaId, diagnostico);
+        } else {
+          await this.diagnosticoService.create({
+            idmedicina: medicinaId,
+            ...diagnostico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create diagnostico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+    try {
+      if (examenregional) {
+        if (existingMedicina.examenregional) {
+          await this.examenRegionalService.update(medicinaId, examenregional);
+        } else {
+          await this.examenRegionalService.create({
+            idmedicina: medicinaId,
+            ...examenregional,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create examenregional for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (examensistemico) {
+        if (existingMedicina.examensistemico) {
+          await this.examenSistemicoService.update(medicinaId, examensistemico);
+        } else {
+          await this.examenSistemicoService.create({
+            idmedicina: medicinaId,
+            ...examensistemico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create examensistemico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (farmacologico) {
+        if (existingMedicina.farmacologico) {
+          await this.farmacologicoService.update(medicinaId, farmacologico);
+        } else {
+          await this.farmacologicoService.create({
+            idmedicina: medicinaId,
+            ...farmacologico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create farmacologico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (general) {
+        if (existingMedicina.general) {
+          await this.generalService.update(medicinaId, general);
+        } else {
+          await this.generalService.create({
+            idmedicina: medicinaId,
+            ...general,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create general for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (ginecologico) {
+        if (existingMedicina.ginecologico) {
+          await this.ginecologicoService.update(medicinaId, ginecologico);
+        } else {
+          await this.ginecologicoService.create({
+            idmedicina: medicinaId,
+            ...ginecologico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create ginecologico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (habitosnocivos) {
+        if (existingMedicina.habitosnocivos) {
+          await this.habitosService.update(medicinaId, habitosnocivos);
+        } else {
+          await this.habitosService.create({
+            idmedicina: medicinaId,
+            ...habitosnocivos,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create habitosnocivos for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (patologico) {
+        if (existingMedicina.patologico) {
+          await this.patologicoService.update(medicinaId, patologico);
+        } else {
+          await this.patologicoService.create({
+            idmedicina: medicinaId,
+            ...patologico,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create patologico for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (revisionactual) {
+        if (existingMedicina.revisionactual) {
+          await this.revisionActualService.update(medicinaId, revisionactual);
+        } else {
+          await this.revisionActualService.create({
+            idmedicina: medicinaId,
+            ...revisionactual,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create revisionactual for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
+
+    try {
+      if (sindromesgeriatricos) {
+        if (existingMedicina.sindromesgeriatricos) {
+          await this.sindromesGeriatricosService.update(medicinaId, sindromesgeriatricos);
+        } else {
+          await this.sindromesGeriatricosService.create({
+            idmedicina: medicinaId,
+            ...sindromesgeriatricos,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Failed to update/create sindromesgeriatricos for Medicina ${medicinaId}:`,
+        error,
+      );
+    }
 
     // ... (repetir el mismo patrón para andrologico, antecedentesfamiliares, diagnostico, etc.) ...
     // Asegúrate de que TODOS los bloques try-catch para las 12 entidades estén aquí.
