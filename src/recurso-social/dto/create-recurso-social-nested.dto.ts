@@ -3,15 +3,15 @@ import { IsOptional, IsInt } from 'class-validator';
 export class CreateRecursoSocialNestedDto {
   @IsOptional()
   @IsInt()
-  rsViveCon?: number;
+  rsVivecon?: number;
 
   @IsOptional()
   @IsInt()
-  rsContactoSocial?: number;
+  rsContactosocial?: number;
 
   @IsOptional()
   @IsInt()
-  rsApoyoRedes?: number;
+  rsApoyored?: number;
 
   @IsOptional()
   @IsInt()

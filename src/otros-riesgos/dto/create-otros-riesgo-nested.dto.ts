@@ -3,11 +3,11 @@ import { IsOptional, IsInt } from 'class-validator';
 export class CreateOtrosRiesgoNestedDto {
   @IsOptional()
   @IsInt()
-  orGrupoEdad?: number;
+  orGrupoedad?: number;
 
   @IsOptional()
   @IsInt()
-  orViveCon?: number;
+  orVivecon?: number;
 
   @IsOptional()
   @IsInt()
@@ -15,7 +15,7 @@ export class CreateOtrosRiesgoNestedDto {
 
   @IsOptional()
   @IsInt()
-  orEnfermedadAguda?: number;
+  orEnfermedadaguda?: number;
 
   @IsOptional()
   @IsInt()

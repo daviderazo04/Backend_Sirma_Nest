@@ -3,27 +3,27 @@ import { IsOptional, IsInt } from 'class-validator';
 export class CreateCognitivoNestedDto {
   @IsOptional()
   @IsInt()
-  cogSabeFecha?: number;
+  cogSabefecha?: number;
 
   @IsOptional()
   @IsInt()
-  cogAprendeDeTres?: number;
+  cogAprendetres?: number;
 
   @IsOptional()
   @IsInt()
-  cogRepiteAlreves?: number;
+  cogRepitealreves?: number;
 
   @IsOptional()
   @IsInt()
-  cogTomaDoblaColoca?: number;
+  cogTomadoblacoloca?: number;
 
   @IsOptional()
   @IsInt()
-  cogRepitePalabras?: number;
+  cogRepitepalabras?: number;
 
   @IsOptional()
   @IsInt()
-  cogCopiaCirculos?: number;
+  cogCopiacirculos?: number;
 
   @IsOptional()
   @IsInt()

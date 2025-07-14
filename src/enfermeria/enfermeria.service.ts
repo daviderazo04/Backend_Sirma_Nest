@@ -101,26 +101,26 @@ export class EnfermeriaService {
     if (actinstrumental) {
       await this.actInstrumentalService.create({
         idenfermeria,
-        aiCuidaCasa: actinstrumental.aiCuidaCasa ?? 0,
-        aiUsaTelefono: actinstrumental.aiUsaTelefono ?? 0,
-        aiMediosTransporte: actinstrumental.aiMediosTransporte ?? 0,
-        aiPreparaComida: actinstrumental.aiPreparaComida ?? 0,
-        aiLavaRopa: actinstrumental.aiLavaRopa ?? 0,
-        aiVaCompras: actinstrumental.aiVaCompras ?? 0,
-        aiManejaDinero: actinstrumental.aiManejaDinero ?? 0,
-        aiManejaMedicina: actinstrumental.aiManejaMedicina ?? 0,
-        aiTotales: actinstrumental.aiTotales ?? 0,
+        aiCuidaCasa: actinstrumental.aiCuidacasa ?? 0,
+        aiUsaTelefono: actinstrumental.aiUsatelefono ?? 0,
+        aiMediosTransporte: actinstrumental.aiMediotransporte ?? 0,
+        aiPreparaComida: actinstrumental.aiPreparacomida ?? 0,
+        aiLavaRopa: actinstrumental.aiLavaropa ?? 0,
+        aiVaCompras: actinstrumental.aiVacompras ?? 0,
+        aiManejaDinero: actinstrumental.aiManejadinero ?? 0,
+        aiManejaMedicina: actinstrumental.aiManejamedicina ?? 0,
+        aiTotales: actinstrumental.aiTotal ?? 0,
       });
     }
     if (cognitivo) {
       await this.cognitivoService.create({
         idenfermeria,
-        cogSabeFecha: cognitivo.cogSabeFecha ?? 0,
-        cogAprendeDeTres: cognitivo.cogAprendeDeTres ?? 0,
-        cogRepiteAlreves: cognitivo.cogRepiteAlreves ?? 0,
-        cogTomaDoblaColoca: cognitivo.cogTomaDoblaColoca ?? 0,
-        cogRepitePalabras: cognitivo.cogRepitePalabras ?? 0,
-        cogCopiaCirculos: cognitivo.cogCopiaCirculos ?? 0,
+        cogSabeFecha: cognitivo.cogSabefecha ?? 0,
+        cogAprendeDeTres: cognitivo.cogAprendetres ?? 0,
+        cogRepiteAlreves: cognitivo.cogRepitealreves ?? 0,
+        cogTomaDoblaColoca: cognitivo.cogTomadoblacoloca ?? 0,
+        cogRepitePalabras: cognitivo.cogRepitepalabras ?? 0,
+        cogCopiaCirculos: cognitivo.cogCopiacirculos ?? 0,
         cogTotal: cognitivo.cogTotal ?? 0,
       });
     }
@@ -167,10 +167,10 @@ export class EnfermeriaService {
     if (otrosriesgos) {
       await this.otrosRiesgosService.create({
         idenfermeria,
-        orGrupoEdad: otrosriesgos.orGrupoEdad ?? 0,
-        orViveCon: otrosriesgos.orViveCon ?? 0,
+        orGrupoEdad: otrosriesgos.orGrupoedad ?? 0,
+        orViveCon: otrosriesgos.orVivecon ?? 0,
         orMovilidad: otrosriesgos.orMovilidad ?? 0,
-        orEnfermedadAguda: otrosriesgos.orEnfermedadAguda ?? 0,
+        orEnfermedadAguda: otrosriesgos.orEnfermedadaguda ?? 0,
         orNeuropsico: otrosriesgos.orNeuropsico ?? 0,
         orTotal: otrosriesgos.orTotal ?? 0,
       });
@@ -178,9 +178,9 @@ export class EnfermeriaService {
     if (recursosocial) {
       await this.recursoSocialService.create({
         idenfermeria,
-        rsViveCon: recursosocial.rsViveCon ?? 0,
-        rsContactoSocial: recursosocial.rsContactoSocial ?? 0,
-        rsApoyoRedes: recursosocial.rsApoyoRedes ?? 0,
+        rsViveCon: recursosocial.rsVivecon ?? 0,
+        rsContactoSocial: recursosocial.rsContactosocial ?? 0,
+        rsApoyoRedes: recursosocial.rsApoyored ?? 0,
         rsTotal: recursosocial.rsTotal ?? 0,
       });
     }
@@ -369,34 +369,55 @@ export class EnfermeriaService {
     }
     if (actinstrumental) {
       if (existingEnfermeria.actinstrumental) {
-        await this.actInstrumentalService.update(idenfermeria, actinstrumental);
+        // Convertir del DTO nested al DTO de update
+        const updateDto = {
+          aiCuidaCasa: actinstrumental.aiCuidacasa,
+          aiUsaTelefono: actinstrumental.aiUsatelefono,
+          aiMediosTransporte: actinstrumental.aiMediotransporte,
+          aiPreparaComida: actinstrumental.aiPreparacomida,
+          aiLavaRopa: actinstrumental.aiLavaropa,
+          aiVaCompras: actinstrumental.aiVacompras,
+          aiManejaDinero: actinstrumental.aiManejadinero,
+          aiManejaMedicina: actinstrumental.aiManejamedicina,
+          aiTotales: actinstrumental.aiTotal,
+        };
+        await this.actInstrumentalService.update(idenfermeria, updateDto);
       } else {
         await this.actInstrumentalService.create({
           idenfermeria,
-          aiCuidaCasa: actinstrumental.aiCuidaCasa ?? 0,
-          aiUsaTelefono: actinstrumental.aiUsaTelefono ?? 0,
-          aiMediosTransporte: actinstrumental.aiMediosTransporte ?? 0,
-          aiPreparaComida: actinstrumental.aiPreparaComida ?? 0,
-          aiLavaRopa: actinstrumental.aiLavaRopa ?? 0,
-          aiVaCompras: actinstrumental.aiVaCompras ?? 0,
-          aiManejaDinero: actinstrumental.aiManejaDinero ?? 0,
-          aiManejaMedicina: actinstrumental.aiManejaMedicina ?? 0,
-          aiTotales: actinstrumental.aiTotales ?? 0,
+          aiCuidaCasa: actinstrumental.aiCuidacasa ?? 0,
+          aiUsaTelefono: actinstrumental.aiUsatelefono ?? 0,
+          aiMediosTransporte: actinstrumental.aiMediotransporte ?? 0,
+          aiPreparaComida: actinstrumental.aiPreparacomida ?? 0,
+          aiLavaRopa: actinstrumental.aiLavaropa ?? 0,
+          aiVaCompras: actinstrumental.aiVacompras ?? 0,
+          aiManejaDinero: actinstrumental.aiManejadinero ?? 0,
+          aiManejaMedicina: actinstrumental.aiManejamedicina ?? 0,
+          aiTotales: actinstrumental.aiTotal ?? 0,
         });
       }
     }
     if (cognitivo) {
       if (existingEnfermeria.cognitivo) {
-        await this.cognitivoService.update(idenfermeria, cognitivo);
+        const updateDto = {
+          cogSabeFecha: cognitivo.cogSabefecha,
+          cogAprendeDeTres: cognitivo.cogAprendetres,
+          cogRepiteAlreves: cognitivo.cogRepitealreves,
+          cogTomaDoblaColoca: cognitivo.cogTomadoblacoloca,
+          cogRepitePalabras: cognitivo.cogRepitepalabras,
+          cogCopiaCirculos: cognitivo.cogCopiacirculos,
+          cogTotal: cognitivo.cogTotal,
+        };
+        await this.cognitivoService.update(idenfermeria, updateDto);
       } else {
         await this.cognitivoService.create({
           idenfermeria,
-          cogSabeFecha: cognitivo.cogSabeFecha ?? 0,
-          cogAprendeDeTres: cognitivo.cogAprendeDeTres ?? 0,
-          cogRepiteAlreves: cognitivo.cogRepiteAlreves ?? 0,
-          cogTomaDoblaColoca: cognitivo.cogTomaDoblaColoca ?? 0,
-          cogRepitePalabras: cognitivo.cogRepitePalabras ?? 0,
-          cogCopiaCirculos: cognitivo.cogCopiaCirculos ?? 0,
+          cogSabeFecha: cognitivo.cogSabefecha ?? 0,
+          cogAprendeDeTres: cognitivo.cogAprendetres ?? 0,
+          cogRepiteAlreves: cognitivo.cogRepitealreves ?? 0,
+          cogTomaDoblaColoca: cognitivo.cogTomadoblacoloca ?? 0,
+          cogRepitePalabras: cognitivo.cogRepitepalabras ?? 0,
+          cogCopiaCirculos: cognitivo.cogCopiacirculos ?? 0,
           cogTotal: cognitivo.cogTotal ?? 0,
         });
       }
@@ -487,10 +508,10 @@ export class EnfermeriaService {
       } else {
         await this.otrosRiesgosService.create({
           idenfermeria,
-          orGrupoEdad: otrosriesgos.orGrupoEdad ?? 0,
-          orViveCon: otrosriesgos.orViveCon ?? 0,
+          orGrupoEdad: otrosriesgos.orGrupoedad ?? 0,
+          orViveCon: otrosriesgos.orVivecon ?? 0,
           orMovilidad: otrosriesgos.orMovilidad ?? 0,
-          orEnfermedadAguda: otrosriesgos.orEnfermedadAguda ?? 0,
+          orEnfermedadAguda: otrosriesgos.orEnfermedadaguda ?? 0,
           orNeuropsico: otrosriesgos.orNeuropsico ?? 0,
           orTotal: otrosriesgos.orTotal ?? 0,
         });
@@ -502,9 +523,9 @@ export class EnfermeriaService {
       } else {
         await this.recursoSocialService.create({
           idenfermeria,
-          rsViveCon: recursosocial.rsViveCon ?? 0,
-          rsContactoSocial: recursosocial.rsContactoSocial ?? 0,
-          rsApoyoRedes: recursosocial.rsApoyoRedes ?? 0,
+          rsViveCon: recursosocial.rsVivecon ?? 0,
+          rsContactoSocial: recursosocial.rsContactosocial ?? 0,
+          rsApoyoRedes: recursosocial.rsApoyored ?? 0,
           rsTotal: recursosocial.rsTotal ?? 0,
         });
       }

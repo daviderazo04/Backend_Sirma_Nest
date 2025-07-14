@@ -3,37 +3,37 @@ import { IsOptional, IsInt } from 'class-validator';
 export class CreateActInstrumentalNestedDto {
   @IsOptional()
   @IsInt()
-  aiCuidaCasa?: number;
+  aiCuidacasa?: number;
 
   @IsOptional()
   @IsInt()
-  aiUsaTelefono?: number;
+  aiUsatelefono?: number;
 
   @IsOptional()
   @IsInt()
-  aiMediosTransporte?: number;
+  aiMediotransporte?: number;
 
   @IsOptional()
   @IsInt()
-  aiPreparaComida?: number;
+  aiPreparacomida?: number;
 
   @IsOptional()
   @IsInt()
-  aiLavaRopa?: number;
+  aiLavaropa?: number;
 
   @IsOptional()
   @IsInt()
-  aiVaCompras?: number;
+  aiVacompras?: number;
 
   @IsOptional()
   @IsInt()
-  aiManejaDinero?: number;
+  aiManejadinero?: number;
 
   @IsOptional()
   @IsInt()
-  aiManejaMedicina?: number;
+  aiManejamedicina?: number;
 
   @IsOptional()
   @IsInt()
-  aiTotales?: number;
+  aiTotal?: number;
 }
