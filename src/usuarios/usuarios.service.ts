@@ -62,25 +62,11 @@ export class UsuariosService {
     const usuario = await this.usuariosRepository.findOneBy({ idusuario });
     if (!usuario) throw new NotFoundException('Usuario no encontrado');
 
-    if (updateDto.userRol) {
-      const allowedRoles = ['admin', 'doctor'];
-      if (
-        !modificador ||
-        !modificador.userRol ||
-        !allowedRoles.includes(modificador.userRol)
-      ) {
-        throw new ForbiddenException(
-          'No tienes permisos para actualizar el rol de este usuario',
-        );
-      }
-      if (
-        modificador.userRol === 'doctor' &&
-        !['doctor', 'estudiante'].includes(updateDto.userRol)
-      ) {
-        throw new ForbiddenException(
-          'El doctor solo puede asignar roles de doctor o estudiante',
-        );
-      }
+    // Solo el admin puede actualizar usuarios
+    if (!modificador || modificador.userRol !== 'admin') {
+      throw new ForbiddenException(
+        'Solo el administrador puede actualizar usuarios',
+      );
     }
 
     Object.assign(usuario, updateDto);
