@@ -18,21 +18,10 @@ import { Usuarios } from './entities/usuario.entity';
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
-  // Registro de paciente (rol usuario por default)
-  @Post('registro')
-  async registerPaciente(@Body() dto: CreateUsuarioDto): Promise<Usuarios> {
+  // Registro/creación de usuario simplificado
+  @Post()
+  async create(@Body() dto: CreateUsuarioDto): Promise<Usuarios> {
     return this.usuariosService.create(dto);
-  }
-
-  // Creación de usuario por admin o doctor
-  @Post('crear')
-  async crearUsuario(
-    @Body() dto: CreateUsuarioDto,
-    @Req() req,
-  ): Promise<Usuarios> {
-    // req.user debe contener el usuario autenticado (simulado aquí)
-    const creador = req.user as Usuarios | null;
-    return this.usuariosService.create(dto, creador);
   }
 
   @Get()
@@ -49,10 +38,8 @@ export class UsuariosController {
   async update(
     @Param('id') id: string,
     @Body() updateDto: Partial<CreateUsuarioDto>,
-    @Req() req,
   ): Promise<Usuarios> {
-    const modificador = req.user as Usuarios | null;
-    return this.usuariosService.update(Number(id), updateDto, modificador);
+    return this.usuariosService.update(Number(id), updateDto, null);
   }
 
   @Delete(':id')

@@ -19,18 +19,6 @@ export class UsuariosService {
     createUsuarioDto: CreateUsuarioDto,
     creador?: Usuarios | null,
   ): Promise<Usuarios> {
-    // Solo el admin puede crear usuarios
-    if (!creador || creador.userRol !== 'admin') {
-      throw new ForbiddenException(
-        'Solo el administrador puede crear usuarios',
-      );
-    }
-
-    // Si no se especifica rol, asignar 'usuario' por defecto
-    if (!createUsuarioDto.userRol) {
-      createUsuarioDto.userRol = 'usuario';
-    }
-
     // Estado activo por defecto
     const usuario = this.usuariosRepository.create({
       ...createUsuarioDto,
@@ -55,13 +43,6 @@ export class UsuariosService {
   ): Promise<Usuarios> {
     const usuario = await this.usuariosRepository.findOneBy({ idusuario });
     if (!usuario) throw new NotFoundException('Usuario no encontrado');
-
-    // Solo el admin puede actualizar usuarios
-    if (!modificador || modificador.userRol !== 'admin') {
-      throw new ForbiddenException(
-        'Solo el administrador puede actualizar usuarios',
-      );
-    }
 
     Object.assign(usuario, updateDto);
     return this.usuariosRepository.save(usuario);
