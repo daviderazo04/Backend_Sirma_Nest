@@ -51,8 +51,8 @@ export class UsuariosController {
     @Body() updateDto: Partial<CreateUsuarioDto>,
     @Req() req,
   ): Promise<Usuarios> {
-    //const modificador = req.user as Usuarios | null;
-    return this.usuariosService.update(Number(id), updateDto);
+    const modificador = req.user as Usuarios | null;
+    return this.usuariosService.update(Number(id), updateDto, modificador);
   }
 
   @Delete(':id')
