@@ -8,7 +8,6 @@ import {
   Param,
   Patch,
   Post,
-  Req,
 } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
@@ -43,12 +42,8 @@ export class UsuariosController {
   }
 
   @Delete(':id')
-  async remove(
-    @Param('id') id: string,
-    @Req() req: { user?: Usuarios | null },
-  ): Promise<{ message: string }> {
-    const eliminador = req.user as Usuarios | null;
-    await this.usuariosService.remove(Number(id), eliminador);
+  async remove(@Param('id') id: string): Promise<{ message: string }> {
+    await this.usuariosService.remove(Number(id));
     return { message: 'Usuario marcado como inactivo correctamente' };
   }
 

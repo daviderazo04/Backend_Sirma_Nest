@@ -45,16 +45,9 @@ export class UsuariosService {
   }
 
   // Borrado lógico: cambia el estado a "inactivo"
-  async remove(idusuario: number, eliminador: Usuarios | null): Promise<void> {
+  async remove(idusuario: number): Promise<void> {
     const usuario = await this.usuariosRepository.findOneBy({ idusuario });
     if (!usuario) throw new NotFoundException('Usuario no encontrado');
-
-    if (!eliminador || eliminador.userRol !== 'admin') {
-      throw new ForbiddenException(
-        'Solo un administrador puede eliminar usuarios',
-      );
-    }
-
     usuario.userEstado = 'inactivo';
     await this.usuariosRepository.save(usuario);
   }
