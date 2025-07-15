@@ -15,10 +15,7 @@ export class UsuariosService {
     private usuariosRepository: Repository<Usuarios>,
   ) {}
 
-  async create(
-    createUsuarioDto: CreateUsuarioDto,
-    creador?: Usuarios | null,
-  ): Promise<Usuarios> {
+  async create(createUsuarioDto: CreateUsuarioDto): Promise<Usuarios> {
     // Estado activo por defecto
     const usuario = this.usuariosRepository.create({
       ...createUsuarioDto,
@@ -39,7 +36,6 @@ export class UsuariosService {
   async update(
     idusuario: number,
     updateDto: Partial<CreateUsuarioDto>,
-    modificador: Usuarios | null,
   ): Promise<Usuarios> {
     const usuario = await this.usuariosRepository.findOneBy({ idusuario });
     if (!usuario) throw new NotFoundException('Usuario no encontrado');

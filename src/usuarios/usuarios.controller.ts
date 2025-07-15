@@ -39,13 +39,13 @@ export class UsuariosController {
     @Param('id') id: string,
     @Body() updateDto: Partial<CreateUsuarioDto>,
   ): Promise<Usuarios> {
-    return this.usuariosService.update(Number(id), updateDto, null);
+    return this.usuariosService.update(Number(id), updateDto);
   }
 
   @Delete(':id')
   async remove(
     @Param('id') id: string,
-    @Req() req,
+    @Req() req: { user?: Usuarios | null },
   ): Promise<{ message: string }> {
     const eliminador = req.user as Usuarios | null;
     await this.usuariosService.remove(Number(id), eliminador);
