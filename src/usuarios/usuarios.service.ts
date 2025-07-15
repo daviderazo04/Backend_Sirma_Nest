@@ -19,30 +19,24 @@ export class UsuariosService {
     createUsuarioDto: CreateUsuarioDto,
     creador?: Usuarios | null,
   ): Promise<Usuarios> {
-    if (!creador) {
-      createUsuarioDto.userRol = 'usuario';
-    } else {
-      const allowedRoles = ['admin', 'doctor'];
-      if (!creador.userRol || !allowedRoles.includes(creador.userRol)) {
-        throw new ForbiddenException(
-          'No tienes permisos para crear usuarios con roles especiales',
-        );
-      }
-      if (
-        creador.userRol === 'doctor' &&
-        (!createUsuarioDto.userRol ||
-          !['doctor', 'estudiante'].includes(createUsuarioDto.userRol))
-      ) {
-        throw new ForbiddenException(
-          'El doctor solo puede crear doctores o estudiantes',
-        );
-      }
+    // Solo el admin puede crear usuarios
+    if (!creador || creador.userRol !== 'admin') {
+      throw new ForbiddenException(
+        'Solo el administrador puede crear usuarios',
+      );
     }
+
+    // Si no se especifica rol, asignar 'usuario' por defecto
+    if (!createUsuarioDto.userRol) {
+      createUsuarioDto.userRol = 'usuario';
+    }
+
     // Estado activo por defecto
     const usuario = this.usuariosRepository.create({
       ...createUsuarioDto,
       userEstado: 'activo',
     });
+
     return this.usuariosRepository.save(usuario);
   }
 
