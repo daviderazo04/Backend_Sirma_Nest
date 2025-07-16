@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require("crypto");
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
@@ -14,8 +15,8 @@ async function bootstrap() {
         whitelist: true,
         forbidNonWhitelisted: true,
         transform: true,
-    })),
-        await app.listen(4046);
+    }));
+    await app.listen(4046);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
