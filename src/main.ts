@@ -1,3 +1,4 @@
+import 'crypto'; // Asegúrate de que el módulo crypto está disponible
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -10,13 +11,15 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
     }),
-  ),
-    await app.listen(4046);
+  );
+
+  await app.listen(4046);
 }
 bootstrap();
