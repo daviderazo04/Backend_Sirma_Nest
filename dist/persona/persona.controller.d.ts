@@ -1,0 +1,30 @@
+import { PersonaService } from './persona.service';
+import { CreatePersonaDto } from './dto/create-persona.dto';
+import { UpdatePersonaDto } from './dto/update-persona.dto';
+import { Persona } from './entities/persona.entity';
+import { Repository } from 'typeorm';
+import { PersonaFicha } from 'src/persona-ficha/entities/persona-ficha.entity';
+import { Datosgenerales } from 'src/datos-generales/entities/datos-generale.entity';
+import { GrupoEdadDto } from './dto/grupo-edad.dto';
+export declare class PersonaController {
+    private readonly personaService;
+    private readonly personaFichaRepository;
+    private readonly datosGeneralesRepository;
+    constructor(personaService: PersonaService, personaFichaRepository: Repository<PersonaFicha>, datosGeneralesRepository: Repository<Datosgenerales>);
+    create(createPersonaDto: CreatePersonaDto): Promise<Persona>;
+    findAll(): Promise<Persona[]>;
+    findOne(id: string): Promise<Persona>;
+    findByCedula(cedula: string): Promise<Persona>;
+    update(id: string, updatePersonaDto: UpdatePersonaDto): Promise<Persona>;
+    remove(id: string): Promise<void>;
+    getDatosGeneralesPorCedula(cedula: string): Promise<Datosgenerales[] | null>;
+    getFichasMedicasPorCedula(cedula: string): Promise<import("../paciente/entities/paciente.entity").Paciente[] | null>;
+    obtenerGruposEdad(): Promise<GrupoEdadDto[]>;
+    personasPorSexo(): Promise<any[]>;
+    personasPorEstadoCivil(): Promise<any[]>;
+    personasPorZona(): Promise<any[]>;
+    personasPorOcupacion(): Promise<any[]>;
+    personasPorInstruccion(): Promise<any[]>;
+    personasPorComunidad(): Promise<any[]>;
+    personasPorCuidador(): Promise<any[]>;
+}

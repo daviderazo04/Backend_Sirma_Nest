@@ -1,0 +1,37 @@
+import { Alerta } from 'src/alerta/entities/alerta.entity';
+import { Andrologico } from 'src/andrologico/entities/andrologico.entity';
+import { Antecedentesfamiliares } from 'src/antecedentes-familiares/entities/antecedentes-familiare.entity';
+import { Diagnostico } from 'src/diagnostico/entities/diagnostico.entity';
+import { Examenregional } from 'src/examen-regional/entities/examen-regional.entity';
+import { Examensistemico } from 'src/examen-sistemico/entities/examen-sistemico.entity';
+import { Farmacologico } from 'src/farmacologico/entities/farmacologico.entity';
+import { General } from 'src/general/entities/general.entity';
+import { Ginecologico } from 'src/ginecologico/entities/ginecologico.entity';
+import { Habitos } from 'src/habitos/entities/habito.entity';
+import { Paciente } from 'src/paciente/entities/paciente.entity';
+import { Patologico } from 'src/patologico/entities/patologico.entity';
+import { Revisionactual } from 'src/revision-actual/entities/revision-actual.entity';
+import { Sindromesgeriatricos } from 'src/sindromes-geriatricos/entities/sindromes-geriatrico.entity';
+export declare class Medicina {
+    idmedicina: number;
+    idficha: string;
+    medNombreencuestador: string | null;
+    medAnamnesis: string | null;
+    medObservacionesrevact: string | null;
+    medObservacionexamenes: string | null;
+    medPlanintegral: string | null;
+    alerta: Alerta;
+    andrologico: Andrologico;
+    antecedentesfamiliares: Antecedentesfamiliares;
+    diagnostico: Diagnostico;
+    examenregional: Examenregional;
+    examensistemico: Examensistemico;
+    farmacologico: Farmacologico;
+    general: General;
+    ginecologico: Ginecologico;
+    habitosnocivos: Habitos;
+    idficha2: Paciente;
+    patologico: Patologico;
+    revisionactual: Revisionactual;
+    sindromesgeriatricos: Sindromesgeriatricos;
+}

@@ -1,0 +1,34 @@
+import { CreateAlertaNestedDto } from '../../alerta/dto/create-alerta-nested.dto';
+import { CreateAndrologicoNestedDto } from '../../andrologico/dto/create-andrologico-nested.dto';
+import { CreateAntecedentesFamiliareNestedDto } from '../../antecedentes-familiares/dto/create-antecedentes-familiares-nested.dto';
+import { CreateDiagnosticoNestedDto } from '../../diagnostico/dto/create-diagnostico-nested.dto';
+import { CreateExamenRegionalNestedDto } from '../../examen-regional/dto/create-examen-regional-nested.dto';
+import { CreateExamenSistemicoNestedDto } from '../../examen-sistemico/dto/create-examen-sistemico-nested.dto';
+import { CreateFarmacologicoNestedDto } from '../../farmacologico/dto/create-farmacologico-nested.dto';
+import { CreateGeneralNestedDto } from '../../general/dto/create-general-nested.dto';
+import { CreateGinecologicoNestedDto } from '../../ginecologico/dto/create-ginecologico-nested.dto';
+import { CreateHabitoNestedDto } from '../../habitos/dto/create-habito-nested.dto';
+import { CreatePatologicoNestedDto } from '../../patologico/dto/create-patologico-nested.dto';
+import { CreateRevisionActualNestedDto } from '../../revision-actual/dto/create-revision-actual-nested.dto';
+import { CreateSindromesGeriatricoNestedDto } from '../../sindromes-geriatricos/dto/create-sindromes-geriatrico-nested.dto';
+export declare class UpdateFullMedicinaDto {
+    idficha?: string;
+    medNombreencuestador?: string;
+    medAnamnesis?: string;
+    medObservacionesrevact?: string;
+    medObservacionexamenes?: string;
+    medPlanintegral?: string;
+    alerta?: CreateAlertaNestedDto;
+    andrologico?: CreateAndrologicoNestedDto;
+    antecedentesfamiliares?: CreateAntecedentesFamiliareNestedDto;
+    diagnostico?: CreateDiagnosticoNestedDto;
+    examenregional?: CreateExamenRegionalNestedDto;
+    examensistemico?: CreateExamenSistemicoNestedDto;
+    farmacologico?: CreateFarmacologicoNestedDto;
+    general?: CreateGeneralNestedDto;
+    ginecologico?: CreateGinecologicoNestedDto;
+    habitosnocivos?: CreateHabitoNestedDto;
+    patologico?: CreatePatologicoNestedDto;
+    revisionactual?: CreateRevisionActualNestedDto;
+    sindromesgeriatricos?: CreateSindromesGeriatricoNestedDto;
+}

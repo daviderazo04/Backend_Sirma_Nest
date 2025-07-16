@@ -1,0 +1,12 @@
+export declare class CreateSindromesGeriatricoNestedDto {
+    sgFragilidad?: boolean;
+    sgDismovilidad?: boolean;
+    sgDepresion?: boolean;
+    sgCaida?: boolean;
+    sgDelirio?: boolean;
+    sgMalnutricion?: boolean;
+    sgUlceraspresion?: boolean;
+    sgDemencia?: boolean;
+    sgIncontinencia?: boolean;
+    sgIatrogenia?: boolean;
+}

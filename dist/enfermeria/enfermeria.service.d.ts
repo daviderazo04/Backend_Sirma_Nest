@@ -1,0 +1,36 @@
+import { Repository } from 'typeorm';
+import { Enfermeria } from './entities/enfermeria.entity';
+import { PacienteService } from '../paciente/paciente.service';
+import { CreateEnfermeriaDto } from './dto/create-enfermeria.dto';
+import { CreateFullEnfermeriaDto } from './dto/create-full-enfermeria.dto';
+import { UpdateFullEnfermeriaDto } from './dto/update-full-enfermeria.dto';
+import { UpdateEnfermeriaDto } from './dto/update-enfermeria.dto';
+import { ActBasicasService } from '../act-basicas/act-basicas.service';
+import { ActInstrumentalService } from '../act-instrumental/act-instrumental.service';
+import { CognitivoService } from '../cognitivo/cognitivo.service';
+import { DepresionService } from '../depresion/depresion.service';
+import { OtrosRiesgosService } from '../otros-riesgos/otros-riesgos.service';
+import { RecursoSocialService } from '../recurso-social/recurso-social.service';
+import { TamizajeService } from '../tamizaje/tamizaje.service';
+export declare class EnfermeriaService {
+    private enfermeriaRepository;
+    private pacienteService;
+    private actBasicasService;
+    private actInstrumentalService;
+    private cognitivoService;
+    private depresionService;
+    private otrosRiesgosService;
+    private recursoSocialService;
+    private tamizajeService;
+    constructor(enfermeriaRepository: Repository<Enfermeria>, pacienteService: PacienteService, actBasicasService: ActBasicasService, actInstrumentalService: ActInstrumentalService, cognitivoService: CognitivoService, depresionService: DepresionService, otrosRiesgosService: OtrosRiesgosService, recursoSocialService: RecursoSocialService, tamizajeService: TamizajeService);
+    create(createEnfermeriaDto: CreateEnfermeriaDto): Promise<Enfermeria>;
+    createFull(createFullEnfermeriaDto: CreateFullEnfermeriaDto): Promise<Enfermeria>;
+    findOne(id: number): Promise<Enfermeria>;
+    findOneFull(id: number): Promise<Enfermeria>;
+    findAll(): Promise<Enfermeria[]>;
+    findAllFull(): Promise<Enfermeria[]>;
+    remove(id: number): Promise<Enfermeria>;
+    update(id: number, UpdateEnfermeriaDto: UpdateEnfermeriaDto): Promise<Enfermeria>;
+    updateFull(id: number, updateFullEnfermeriaDto: UpdateFullEnfermeriaDto): Promise<Enfermeria>;
+    obtenerEnfermeriaCompleta(idEnfermeria: number): Promise<any>;
+}
